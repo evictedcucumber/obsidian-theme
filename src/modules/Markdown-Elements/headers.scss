@@ -17,6 +17,7 @@ $accents: "rosewater", "flamingo", "pink", "mauve", "red", "maroon", "peach",
             &.anp-h#{$i}-#{$accent} {
 
                 .app-container,
+                .popover,
                 .print {
                     --h#{$i}-color: rgb(var(--ctp-#{$accent}));
                 }
@@ -50,17 +51,18 @@ $accents: "rosewater", "flamingo", "pink", "mauve", "red", "maroon", "peach",
 @for $i from 1 through 6 {
     .anp-header-margin-toggle {
 
-        .cm-header-#{$i},
+        // Editor lines can't take vertical margins, and an inline-block .cm-header
+        // breaks the "#" marker onto its own line, so pad the line instead
+        .HyperMD-header-#{$i} {
+            padding-block-start: var(--anp-header-margin-value);
+            padding-block-end: var(--anp-header-margin-value);
+        }
+
         .markdown-preview-view h#{$i} {
             margin-block-start: var(--anp-header-margin-value);
             margin-block-end: var(--anp-header-margin-value);
         }
     }
-}
-
-// fix source editor margins
-.cm-header {
-    display: inline-block;
 }
 
 .anp-editor-font-toggle .markdown-source-view:not(.is-live-preview) {
