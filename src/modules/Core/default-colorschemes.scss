@@ -2,12 +2,12 @@
 @use "sass:color";
 @use "sass:math";
 /*------------------Defining Colorschemes-------------------*/
-@import "colorschemes/latte.scss";
-@import "colorschemes/rosepine-light.scss";
-@import "colorschemes/frappe.scss";
-@import "colorschemes/macchiato.scss";
-@import "colorschemes/mocha.scss";
-@import "colorschemes/mocha-old.scss";
+@use "colorschemes/latte.scss" as *;
+@use "colorschemes/rosepine-light.scss" as *;
+@use "colorschemes/frappe.scss" as *;
+@use "colorschemes/macchiato.scss" as *;
+@use "colorschemes/mocha.scss" as *;
+@use "colorschemes/mocha-old.scss" as *;
 $theme-list: $theme-latte, $theme-rosepine-light, $theme-frappe, $theme-macchiato, $theme-mocha, $theme-mocha-old;
 $color-list: "rosewater", "flamingo", "pink", "mauve", "red", "maroon", "peach", "yellow", "green", "teal", "sky", "sapphire", "blue", "lavender", "text", "subtext1", "subtext0", "overlay2", "overlay1", "overlay0", "surface2", "surface1", "surface0", "base", "mantle", "crust";
 

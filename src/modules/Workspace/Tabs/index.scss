@@ -1,5 +1,5 @@
-@import "main.scss";
-@import "safari-vanilla-tabs.scss";
-@import "safari-tabs.scss";
-@import "minimalistic-tabs.scss";
-@import "depth-tabs.scss";
+@use "main.scss" as *;
+@use "safari-vanilla-tabs.scss" as *;
+@use "safari-tabs.scss" as *;
+@use "minimalistic-tabs.scss" as *;
+@use "depth-tabs.scss" as *;

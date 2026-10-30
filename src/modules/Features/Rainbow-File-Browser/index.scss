@@ -3,6 +3,6 @@
 * Author: AnubisNekhet
 * https://www.buymeacoffee.com/anubisnekhet
 *===============================================================*/
-@import "colors.scss";
-@import "fullrainbow.scss";
-@import "simplerainbow.scss";
+@use "colors.scss" as *;
+@use "fullrainbow.scss" as *;
+@use "simplerainbow.scss" as *;

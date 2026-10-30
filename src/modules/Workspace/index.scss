@@ -1,9 +1,9 @@
-@import "canvas.scss";
-@import "general-ui.scss";
-@import "settings-page.scss";
-@import "stacked-tabs.scss";
-@import "translucency.scss";
-@import "tabtitlebar.scss";
-@import "Tabs/index.scss";
-@import "Layouts/index.scss";
-@import "Status-Bar/index.scss";
+@use "canvas.scss" as *;
+@use "general-ui.scss" as *;
+@use "settings-page.scss" as *;
+@use "stacked-tabs.scss" as *;
+@use "translucency.scss" as *;
+@use "tabtitlebar.scss" as *;
+@use "Tabs/index.scss" as *;
+@use "Layouts/index.scss" as *;
+@use "Status-Bar/index.scss" as *;
