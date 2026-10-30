@@ -30,8 +30,6 @@ $accents: "rosewater", "flamingo", "pink", "mauve", "red", "maroon", "peach",
     --color-accent-1: rgb(var(--ctp-accent));
     --color-accent-2: rgba(var(--ctp-accent), 0.9);
     --text-selection: rgba(var(--ctp-accent), 0.25);
-    --interactive-accent: rgb(var(--ctp-accent));
-    --interactive-accent-hover: rgba(var(--ctp-accent), 0.9);
     --text-accent: rgb(var(--ctp-accent));
     --text-accent-hover: rgb(var(--ctp-accent));
     --text-highlight-bg: rgba(var(--ctp-accent), 0.4);
@@ -85,11 +83,11 @@ $accents: "rosewater", "flamingo", "pink", "mauve", "red", "maroon", "peach",
     --color-base-100: rgb(var(--ctp-text));
     --text-highlight-bg: rgba(var(--ctp-yellow), 0.2);
     --text-highlight-bg-active: rgba(var(--ctp-yellow), 0.4);
-    --input-shadow: inset 0 0.5px 0.5px 0.5px rgba(var(255, 255, 255), 0.09),
+    --input-shadow: inset 0 0.5px 0.5px 0.5px rgba(255, 255, 255, 0.09),
         0 2px 4px 0 rgba(var(--ctp-crust), 0.15),
         0 1px 1.5px 0 rgba(var(--ctp-crust), 0.1),
         0 1px 2px 0 rgba(var(--ctp-crust), 0.2), 0 0 0 0 transparent;
-    --input-shadow-hover: inset 0 0.5px 1px 0.5px rgba(var(255, 255, 255), 0.16),
+    --input-shadow-hover: inset 0 0.5px 1px 0.5px rgba(255, 255, 255, 0.16),
         0 2px 3px 0 rgba(var(--ctp-crust), 0.3),
         0 1px 1.5px 0 rgba(var(--ctp-crust), 0.2),
         0 1px 2px 0 rgba(var(--ctp-crust), 0.4), 0 0 0 0 transparent;
@@ -149,7 +147,7 @@ $accents: "rosewater", "flamingo", "pink", "mauve", "red", "maroon", "peach",
     --background-modifier-cover: rgba(var(--ctp-mantle), 0.4);
 
     &.theme-dark {
-        --canvas-color: var(--ctp-overlay0);
+        --canvas-color: rgb(var(--ctp-overlay0));
     }
 }
 
@@ -163,7 +161,7 @@ $accents: "rosewater", "flamingo", "pink", "mauve", "red", "maroon", "peach",
     --background-modifier-cover: #00000022;
 
     &.theme-light {
-        --canvas-color: var(--ctp-overlay0);
+        --canvas-color: rgb(var(--ctp-overlay0));
     }
 }
 
@@ -178,7 +176,7 @@ body {
     --tab-stacked-pane-width: calc(var(--anp-tab-stacked-pane-width, 1) * var(--file-line-width));
     --anp-table-width-pct: 100%;
     --code-background: var(--anp-code-bg-color, var(--background-secondary-alt));
-    --canvas-color: var(--ctp-overlay2);
+    --canvas-color: rgb(var(--ctp-overlay2));
     --card-background-color: rgb(var(--ctp-crust));
     --card-foreground-color: rgb(var(--ctp-base));
     --tab-inactive-color: rgb(var(--ctp-mantle));
