@@ -6344,6 +6344,10 @@ body:not(.anuppuccin-accent-toggle) .markdown-rendered.metadata-button .metadata
   left: calc(100% - 32px);
   border-radius: 6px;
 }
+.anp-button-metadata-toggle .metadata-container .metadata-properties-heading > *,
+.markdown-rendered.metadata-button .metadata-container .metadata-properties-heading > * {
+  display: none;
+}
 .anp-button-metadata-toggle .metadata-container .metadata-properties-heading:after,
 .markdown-rendered.metadata-button .metadata-container .metadata-properties-heading:after {
   position: absolute;
