@@ -4,11 +4,7 @@
     --callout-blend-mode: normal;
 
     >.callout-title>.callout-title-inner {
-        .theme-light & {
-            color: var(--text-normal); //text color for callout titles in light theme
-        }
-
-        flex-grow: var(--anp-callout-fold-position, 0); //set fold position via style settings
+        flex-grow: 0; //fold position
     }
 
     &:not(.is-collapsible) {

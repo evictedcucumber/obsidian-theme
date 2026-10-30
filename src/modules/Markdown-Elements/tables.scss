@@ -1,5 +1,5 @@
 /*-Recolor table borders-*/
-.anp-table-toggle {
+body {
 
     .markdown-preview-view:not(.cards):not(.table-disable) table,
     .markdown-preview-view.cards:not(.table-disable) table:not(.dataview),
@@ -12,18 +12,18 @@
         thead tr>th:first-child,
         thead tr>th,
         thead tr>th:last-child {
-            border: var(--anp-table-thickness, 1px) solid var(--table-border-color);
+            border: 1px solid var(--table-border-color);
         }
 
         th:not([align]),
         thead tr>th:first-child:not([align]),
         thead tr>th:not([align]),
         thead tr>th:last-child:not([align]) {
-            text-align: var(--anp-table-align-th, center);
+            text-align: center;
         }
 
         td:not([align]) {
-            text-align: var(--anp-table-align-td, center);
+            text-align: center;
         }
     }
 }
@@ -40,19 +40,19 @@ $table-styling: th-highlight, row-alt, col-alt, full, checkered;
 @mixin styling($style) {
     @if $style ==th-highlight {
         th {
-            background-color: rgba(var(--ctp-mantle), var(--anp-table-highlight-opacity, 0.5));
+            background-color: rgba(var(--ctp-mantle), 0.5);
         }
     }
 
     @if $style ==row-alt {
         tr:nth-child(2n) td {
-            background-color: rgba(var(--ctp-mantle), var(--anp-table-highlight-opacity, 0.5));
+            background-color: rgba(var(--ctp-mantle), 0.5);
         }
     }
 
     @if $style ==col-alt {
         tr td:nth-child(2n) {
-            background-color: rgba(var(--ctp-mantle), var(--anp-table-highlight-opacity, 0.5));
+            background-color: rgba(var(--ctp-mantle), 0.5);
         }
     }
 
@@ -60,84 +60,74 @@ $table-styling: th-highlight, row-alt, col-alt, full, checkered;
 
         tr td:nth-child(2n),
         tr:nth-child(2n) td {
-            background-color: rgba(var(--ctp-mantle), var(--anp-table-highlight-opacity, 0.5));
+            background-color: rgba(var(--ctp-mantle), 0.5);
         }
 
         tr:nth-child(2n) td:nth-child(2n) {
-            background-color: rgba(var(--ctp-crust), var(--anp-table-highlight-opacity, 0.5));
+            background-color: rgba(var(--ctp-crust), 0.5);
         }
     }
 
     @if $style ==full {
         td {
-            background-color: rgba(var(--ctp-mantle), var(--anp-table-highlight-opacity, 0.5));
+            background-color: rgba(var(--ctp-mantle), 0.5);
         }
     }
 }
 
 // applies styling for:
 // reading mode and live preview for dataview tables without minimal card styling and regular tables in general
+// global: th-highlight and row-alt
 // also uses the following classes for per-note styling:
 // row-alt
 // col-alt
 // checkered
 // table-full
 // th-highlight
+body {
+
+    .markdown-preview-view:not(.cards):not(.table-disable),
+    .markdown-preview-view.cards:not(.table-disable) table:not(.dataview),
+    .is-live-preview:not(.cards):not(.table-disable),
+    .is-live-preview.cards:not(.table-disable) table:not(.dataview) {
+        @include styling(th-highlight);
+        @include styling(row-alt);
+    }
+}
+
 @each $table-style in $table-styling {
-    .anp-table-toggle {
+    @if $table-style !=full {
+        .#{$table-style} {
 
-        &.anp-table-#{"#{$table-style}"} {
- .markdown-preview-view:not(.cards):not(.table-disable),
-        .markdown-preview-view.cards:not(.table-disable) table:not(.dataview),
-        .is-live-preview:not(.cards):not(.table-disable),
-        .is-live-preview.cards:not(.table-disable) table:not(.dataview) {
-            @include styling($table-style);
+            &.markdown-preview-view:not(.cards):not(.table-disable),
+            &.markdown-preview-view.cards:not(.table-disable) table:not(.dataview),
+            &.is-live-preview:not(.cards):not(.table-disable),
+            &.is-live-preview.cards:not(.table-disable) table:not(.dataview) {
+                @include styling($table-style);
+            }
+        }
+    }
+
+    @else {
+        .table-#{$table-style} {
+
+            &.markdown-preview-view:not(.cards):not(.table-disable),
+            &.markdown-preview-view.cards:not(.table-disable) table:not(.dataview),
+            &.is-live-preview:not(.cards):not(.table-disable),
+            &.is-live-preview.cards:not(.table-disable) table:not(.dataview) {
+                @include styling($table-style);
+            }
         }
     }
 }
 
-@if $table-style !=full {
-    .#{$table-style} {
-
-        &.markdown-preview-view:not(.cards):not(.table-disable),
-        &.markdown-preview-view.cards:not(.table-disable) table:not(.dataview),
-        &.is-live-preview:not(.cards):not(.table-disable),
-        &.is-live-preview.cards:not(.table-disable) table:not(.dataview) {
-            @include styling($table-style);
-        }
-    }
-}
-
-@else {
-    .table-#{$table-style} {
-
-        &.markdown-preview-view:not(.cards):not(.table-disable),
-        &.markdown-preview-view.cards:not(.table-disable) table:not(.dataview),
-        &.is-live-preview:not(.cards):not(.table-disable),
-        &.is-live-preview.cards:not(.table-disable) table:not(.dataview) {
-            @include styling($table-style);
-        }
-    }
-}
-}
-
-.anp-table-auto.markdown-rendered:not(.cards):not(.table-disable) table,
-.anp-table-auto.markdown-rendered.cards:not(.table-disable) table:not(.dataview) {
+body .markdown-rendered:not(.cards):not(.table-disable) table,
+body .markdown-rendered.cards:not(.table-disable) table:not(.dataview) {
     margin: 0 auto;
 }
 
-.anp-table-width.markdown-rendered:not(.cards):not(.table-disable) table,
-.anp-table-width.markdown-rendered.cards:not(.table-disable) table:not(.dataview) {
-    width: var(--anp-table-width-pct);
-}
-
-.anp-table-auto.anp-table-toggle .markdown-rendered:not(.cards):not(.table-disable) table,
-.anp-table-auto.anp-table-toggle .markdown-rendered.cards:not(.table-disable) table:not(.dataview) {
-    margin: 0 auto;
-}
-
-.anp-table-width.anp-table-toggle .markdown-rendered:not(.cards):not(.table-disable) table,
-.anp-table-width.anp-table-toggle .markdown-rendered.cards:not(.table-disable) table:not(.dataview) {
+body .markdown-rendered:not(.cards):not(.table-disable) table,
+body .markdown-rendered.cards:not(.table-disable) table:not(.dataview) {
     width: var(--anp-table-width-pct);
     margin-left: calc(50% - var(--anp-table-width-pct)/2);
     margin-right: calc(50% - var(--anp-table-width-pct)/2);

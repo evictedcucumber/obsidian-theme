@@ -1,3 +1,5 @@
+@use "sass:list";
+
 /*--------------HEADERS----------------*/
 
 // Fix fold indicators of headings in edit mode when using em font sizes (match reading mode)
@@ -8,37 +10,15 @@
 
 // Custom header font
 
-$accents: "rosewater", "flamingo", "pink", "mauve", "red", "maroon", "peach",
-    "yellow", "green", "teal", "sky", "sapphire", "blue", "lavender";
+$header-colors: "mauve", "pink", "sky", "green", "peach", "yellow";
 
 @for $i from 1 through 6 {
-    @each $accent in $accents {
-        .anp-header-color-toggle {
-            &.anp-h#{$i}-#{$accent} {
+    body {
 
-                .app-container,
-                .popover,
-                .print {
-                    --h#{$i}-color: rgb(var(--ctp-#{$accent}));
-                }
-            }
-        }
-    }
-
-    .anp-h#{$i}-divider {
-
-        .markdown-rendered h#{$i},
-        .HyperMD-header-#{$i} {
-            border-bottom: var(--hr-thickness) solid var(--background-modifier-border);
-            padding-bottom: 2px;
-        }
-
-        &.anp-header-divider-color-toggle {
-
-            .markdown-rendered h#{$i},
-            .HyperMD-header-#{$i} {
-                border-bottom-color: currentColor;
-            }
+        .app-container,
+        .popover,
+        .print {
+            --h#{$i}-color: rgb(var(--ctp-#{list.nth($header-colors, $i)}));
         }
     }
 
@@ -47,9 +27,19 @@ $accents: "rosewater", "flamingo", "pink", "mauve", "red", "maroon", "peach",
     }
 }
 
+// h1 divider, coloured like the heading
+body {
+
+    .markdown-rendered h1,
+    .HyperMD-header-1 {
+        border-bottom: var(--hr-thickness) solid currentColor;
+        padding-bottom: 2px;
+    }
+}
+
 // Source editor recolor application
 @for $i from 1 through 6 {
-    .anp-header-margin-toggle {
+    body {
 
         // Editor lines can't take vertical margins, and an inline-block .cm-header
         // breaks the "#" marker onto its own line, so pad the line instead
@@ -63,13 +53,4 @@ $accents: "rosewater", "flamingo", "pink", "mauve", "red", "maroon", "peach",
             margin-block-end: var(--anp-header-margin-value);
         }
     }
-}
-
-.anp-editor-font-toggle .markdown-source-view:not(.is-live-preview) {
-    --h1-font: var(--anp-editor-font);
-    --h2-font: var(--anp-editor-font);
-    --h3-font: var(--anp-editor-font);
-    --h4-font: var(--anp-editor-font);
-    --h5-font: var(--anp-editor-font);
-    --h6-font: var(--anp-editor-font);
 }

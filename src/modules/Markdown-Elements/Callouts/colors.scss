@@ -1,7 +1,7 @@
-.anp-callout-color-toggle {
+body {
     .callout {
         &[data-callout="note"] {
-            --callout-color: rgb(var(--ctp-blue));
+            --callout-color: rgb(var(--ctp-accent));
         }
 
         &[data-callout="abstract"],
@@ -53,12 +53,6 @@
         &[data-callout="quote"],
         &[data-callout="cite"] {
             --callout-color: rgb(var(--ctp-overlay2));
-        }
-    }
-
-    &.anuppuccin-accent-toggle .callout {
-        &[data-callout="note"] {
-            --callout-color: rgb(var(--ctp-accent));
         }
     }
 }
