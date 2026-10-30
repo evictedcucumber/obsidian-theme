@@ -52,6 +52,11 @@ body:not(.anuppuccin-accent-toggle) {
             position: absolute;
             left: calc(100% - 32px);
             border-radius: 6px;
+
+            // The title and collapse arrow set their own colours, so hide them outright
+            > * {
+                display: none;
+            }
         }
 
         .metadata-properties-heading:after {
