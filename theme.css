@@ -3914,6 +3914,20 @@ input.slider,
   background-color: rgba(var(--ctp-text), 0.075);
 }
 
+/*-Side dock Ribbon border fix-*/
+.side-dock-ribbon,
+.workspace-ribbon.mod-primary:before {
+  border: none;
+}
+
+/*-Keep the ribbon's header bar in step with the tab bar-*/
+/* Only the default layout draws a bottom border under the tab headers, so only there
+   does the ribbon's ::before need the same one; without it the frame band ran one
+   pixel further down over the ribbon than next to it. */
+body:not(.anp-card-layout):not(.anp-border-layout) .workspace-ribbon.mod-primary::before {
+  border-bottom: var(--tab-outline-width) solid var(--tab-outline-color);
+}
+
 .mod-community-theme .modal-content .community-modal-details .community-modal-info summary h1:first-child,
 .mod-community-theme .modal-content .community-modal-details .community-modal-info summary h2:first-child,
 .mod-community-theme .modal-content .community-modal-details .community-modal-info summary h3:first-child,
@@ -4336,6 +4350,12 @@ body.anp-card-layout.anp-hide-borders .menu {
 body.anp-card-layout .sidebar-toggle-button,
 body.anp-card-layout .workspace-tabs.mod-top {
   --tab-container-background: var(--card-background-color);
+  --sidebar-tab-container-background: var(--tab-container-background);
+}
+body.anp-card-layout .horizontal-main-container {
+  --ribbon-background: var(--card-background-color);
+  --ribbon-background-collapsed: var(--card-background-color);
+  --titlebar-background: var(--card-background-color);
 }
 body.anp-card-layout .workspace-tabs.mod-top:has(.obsidian-banner-wrapper) {
   --file-header-border: none;
@@ -4383,15 +4403,12 @@ body.anp-card-layout .workspace-split.mod-left-split .workspace-sidedock-vault-p
   margin-bottom: 0;
   background-color: transparent;
 }
-body.anp-card-layout .workspace-ribbon.mod-primary {
-  margin-top: calc(var(--header-height) - 1px);
-}
 body.anp-card-layout .workspace-tab-header-container,
 body.anp-card-layout .workspace-ribbon.mod-primary:before {
   border-bottom: none;
 }
 body.anp-card-layout .mod-vertical .workspace-tabs .workspace-tab-header-container {
-  padding-left: var(--anp-card-header-left-padding, 20px);
+  padding-left: calc(var(--anp-card-header-left-padding, 20px) + var(--anp-card-radius, var(--radius-xl)));
 }
 body.anp-card-layout .mod-vertical .workspace-tabs .workspace-tab-header-container .workspace-tab-header-container-inner {
   margin: 6px -5px calc(var(--tab-outline-width) * -1);
@@ -6454,22 +6471,23 @@ body.anp-colorful-frame-icon-toggle-dark.theme-dark {
 .anp-colorful-frame .sidebar-toggle-button {
   padding: var(--size-4-1) !important;
   background-color: transparent;
+  --sidebar-tab-container-background: var(--colorful-frame-color) !important;
   height: calc(var(--header-height) - 5px);
   margin-right: 0;
   border-radius: 0 0 var(--radius-m) var(--radius-m);
   border-width: 0 1px 1px 1px;
   border-style: solid;
   border-color: transparent;
-  --icon-color: var(--text-muted);
-  --icon-color-hover: var(--text-muted);
-  --icon-color-active: var(--text-accent);
-  --icon-color-focused: var(--text-normal);
+  --icon-color: var(--colorful-icon-color-alt);
+  --icon-color-hover: var(--colorful-icon-color);
+  --icon-color-active: var(--colorful-icon-color-alt);
+  --icon-color-focused: var(--colorful-icon-color-alt);
 }
 .anp-colorful-frame .sidebar-toggle-button .clickable-icon {
-  --icon-color: var(--text-muted) !important;
-  --icon-color-hover: var(--text-muted) !important;
-  --icon-color-active: var(--text-accent) !important;
-  --icon-color-focused: var(--text-normal) !important;
+  --icon-color: var(--colorful-icon-color-alt) !important;
+  --icon-color-hover: var(--colorful-icon-color) !important;
+  --icon-color-active: var(--colorful-icon-color-alt) !important;
+  --icon-color-focused: var(--colorful-icon-color-alt) !important;
 }
 
 .anp-colorful-frame:not(.anp-card-layout, .anp-border-layout).anp-mini-tab-toggle.is-focused .mod-active.mod-top .workspace-tab-header.is-active .workspace-tab-header-inner-icon,
@@ -6490,10 +6508,51 @@ body.anp-colorful-frame.anp-card-layout .workspace,
   background-color: var(--tab-container-background);
 }
 
+body.anp-colorful-frame.anp-card-layout .horizontal-main-container {
+  --ribbon-background: var(--colorful-frame-color);
+  --ribbon-background-collapsed: var(--colorful-frame-color);
+  --titlebar-background: var(--colorful-frame-color);
+  --titlebar-background-focused: var(--colorful-frame-color);
+}
+body.anp-colorful-frame.anp-card-layout .workspace-ribbon {
+  --icon-color: var(--colorful-icon-color);
+  --icon-color-hover: var(--colorful-icon-color-alt);
+  --icon-color-active: var(--colorful-icon-color-alt);
+  --icon-color-focused: var(--colorful-icon-color);
+}
+body.anp-colorful-frame.anp-card-layout .workspace-ribbon .clickable-icon:hover {
+  background-color: rgba(var(--ctp-crust), 0.2);
+}
+body.anp-colorful-frame.anp-card-layout .workspace-ribbon .clickable-icon:active {
+  background-color: rgba(var(--ctp-crust), 0.3);
+}
+body.anp-colorful-frame.anp-card-layout:not(.anp-card-layout-filebrowser) .workspace-leaf:has(> .workspace-leaf-content[data-type=file-explorer]) {
+  background-color: var(--card-foreground-color);
+  border-radius: var(--anp-card-radius, var(--radius-xl));
+}
+body.anp-colorful-frame.anp-card-layout:not(.anp-card-layout-filebrowser) .workspace-leaf-content[data-type=file-explorer] {
+  --tab-text-color: var(--text-faint);
+  --tab-text-color-active: var(--text-muted);
+  --tab-text-color-focused: var(--text-muted);
+  --tab-text-color-focused-active: var(--text-muted);
+  --tab-text-color-focused-highlighted: var(--text-accent);
+  --tab-text-color-focused-active-current: var(--text-normal);
+  --icon-color: var(--text-muted);
+  --icon-color-hover: var(--text-muted);
+  --icon-color-active: var(--text-accent);
+  --icon-color-focused: var(--text-normal);
+}
+
+body.anp-colorful-frame .workspace-split .workspace-tab-header-container .workspace-tab-header.is-active {
+  box-shadow: none;
+}
+body.anp-colorful-frame .workspace-split .workspace-tab-header-container .workspace-tab-header.is-active::before, body.anp-colorful-frame .workspace-split .workspace-tab-header-container .workspace-tab-header.is-active::after {
+  box-shadow: inset 0 0 0 var(--tab-outline-width) transparent, 0 0 0 calc(var(--tab-curve) * 4) var(--tab-background-active);
+}
+
 .anp-colorful-frame.anp-card-layout,
 .anp-colorful-frame.anp-card-layout .workspace-tab-container,
-.anp-colorful-frame.anp-card-layout.anp-mini-tab-toggle .mod-vertical .workspace-tab-header.is-active,
-.anp-colorful-frame.anp-card-layout:not(.anp-card-layout-filebrowser) .workspace-leaf-content[data-type=file-explorer] {
+.anp-colorful-frame.anp-card-layout.anp-mini-tab-toggle .mod-vertical .workspace-tab-header.is-active {
   --tab-text-color: var(--background-secondary-alt);
   --tab-text-color-focused: var(--background-secondary-alt);
   --tab-text-color-focused-active: var(--background-secondary-alt);
