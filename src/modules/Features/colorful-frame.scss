@@ -237,19 +237,18 @@ body.anp-colorful-frame-icon-toggle-dark.theme-dark {
 }
 
 .anp-colorful-frame .sidebar-toggle-button.sidebar-toggle-button {
-    background-color: var(--background-primary) !important;
+    background-color: transparent !important;
 }
 
 .anp-colorful-frame .sidebar-toggle-button {
     padding: var(--size-4-1) !important;
-    background-color: var(--background-primary);
-    --tab-container-background: var(--background-primary) !important;
+    background-color: transparent;
     height: calc(var(--header-height) - 5px);
     margin-right: 0;
     border-radius: 0 0 var(--radius-m) var(--radius-m);
     border-width: 0 1px 1px 1px;
     border-style: solid;
-    border-color: var(--tab-outline-color);
+    border-color: transparent;
     --icon-color: var(--text-muted);
     --icon-color-hover: var(--text-muted);
     --icon-color-active: var(--text-accent);
@@ -428,9 +427,9 @@ body.anp-colorful-frame.anp-card-layout .workspace,
     opacity: 0.5;
 }
 
-.anp-colorful-frame {
-    --titlebar-background: var(--anp-colorful-frame-color, var(--color-accent));
-    --titlebar-background-focused: var(--anp-colorful-frame-color, var(--color-accent));
+body.anp-colorful-frame.anp-colorful-frame {
+    --titlebar-background: rgba(var(--anp-colorful-frame-color, var(--ctp-accent)), var(--anp-colorful-frame-opacity, 1));
+    --titlebar-background-focused: rgba(var(--anp-colorful-frame-color, var(--ctp-accent)), var(--anp-colorful-frame-opacity, 1));
     --titlebar-text-color: var(--background-primary);
     --titlebar-text-color-focused: var(--background-secondary-alt);
 }

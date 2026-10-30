@@ -7,6 +7,8 @@ body.anp-card-layout {
     --divider-width: 4px;
     --divider-width-hover: 4px;
     --tab-container-background: var(--card-background-color);
+    --titlebar-background: var(--card-background-color);
+    --titlebar-background-focused: var(--card-background-color);
     --file-header-border: var(--border-width) dashed var(--background-modifier-border);
     --ribbon-padding: 0;
 
