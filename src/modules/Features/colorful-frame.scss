@@ -243,22 +243,26 @@ body.anp-colorful-frame-icon-toggle-dark.theme-dark {
 .anp-colorful-frame .sidebar-toggle-button {
     padding: var(--size-4-1) !important;
     background-color: transparent;
+    // The right-hand toggle is .mod-secondary, which Obsidian paints with
+    // var(--sidebar-tab-container-background). Keep that on the frame colour so both
+    // toggles match the rest of the tab-bar icons instead of going dark.
+    --sidebar-tab-container-background: var(--colorful-frame-color) !important;
     height: calc(var(--header-height) - 5px);
     margin-right: 0;
     border-radius: 0 0 var(--radius-m) var(--radius-m);
     border-width: 0 1px 1px 1px;
     border-style: solid;
     border-color: transparent;
-    --icon-color: var(--text-muted);
-    --icon-color-hover: var(--text-muted);
-    --icon-color-active: var(--text-accent);
-    --icon-color-focused: var(--text-normal);
+    --icon-color: var(--colorful-icon-color-alt);
+    --icon-color-hover: var(--colorful-icon-color);
+    --icon-color-active: var(--colorful-icon-color-alt);
+    --icon-color-focused: var(--colorful-icon-color-alt);
 
     .clickable-icon {
-        --icon-color: var(--text-muted) !important;
-        --icon-color-hover: var(--text-muted) !important;
-        --icon-color-active: var(--text-accent) !important;
-        --icon-color-focused: var(--text-normal) !important;
+        --icon-color: var(--colorful-icon-color-alt) !important;
+        --icon-color-hover: var(--colorful-icon-color) !important;
+        --icon-color-active: var(--colorful-icon-color-alt) !important;
+        --icon-color-focused: var(--colorful-icon-color-alt) !important;
     }
 }
 
@@ -281,10 +285,74 @@ body.anp-colorful-frame.anp-card-layout .workspace,
     background-color: var(--tab-container-background);
 }
 
+// In the card layout the coloured frame is the band across the top of the window.
+// The panes below it belong to the workspace, so they keep the card colour instead
+// of inheriting the frame colour, and the ribbon joins the coloured frame.
+body.anp-colorful-frame.anp-card-layout {
+
+    .horizontal-main-container {
+        --ribbon-background: var(--colorful-frame-color);
+        --ribbon-background-collapsed: var(--colorful-frame-color);
+        --titlebar-background: var(--colorful-frame-color);
+        --titlebar-background-focused: var(--colorful-frame-color);
+    }
+
+    .workspace-ribbon {
+        --icon-color: var(--colorful-icon-color);
+        --icon-color-hover: var(--colorful-icon-color-alt);
+        --icon-color-active: var(--colorful-icon-color-alt);
+        --icon-color-focused: var(--colorful-icon-color);
+
+        .clickable-icon:hover {
+            background-color: rgba(var(--ctp-crust), 0.2);
+        }
+
+        .clickable-icon:active {
+            background-color: rgba(var(--ctp-crust), 0.3);
+        }
+    }
+
+    // Without the file browser card the file explorer would sit on the frame colour,
+    // so give that pane the card colour and the normal text and icon colours back.
+    &:not(.anp-card-layout-filebrowser) {
+        .workspace-leaf:has(> .workspace-leaf-content[data-type="file-explorer"]) {
+            background-color: var(--card-foreground-color);
+            border-radius: var(--anp-card-radius, var(--radius-xl));
+        }
+
+        .workspace-leaf-content[data-type="file-explorer"] {
+            --tab-text-color: var(--text-faint);
+            --tab-text-color-active: var(--text-muted);
+            --tab-text-color-focused: var(--text-muted);
+            --tab-text-color-focused-active: var(--text-muted);
+            --tab-text-color-focused-highlighted: var(--text-accent);
+            --tab-text-color-focused-active-current: var(--text-normal);
+            --icon-color: var(--text-muted);
+            --icon-color-hover: var(--text-muted);
+            --icon-color-active: var(--text-accent);
+            --icon-color-focused: var(--text-normal);
+        }
+    }
+}
+
+// Obsidian outlines the active tab with a zero-blur box-shadow, and repeats that ring
+// on the two curve fillers under the tab. Against the colourful frame the ring only
+// makes the tab stand out, so keep the fillers' fill and drop the ring.
+body.anp-colorful-frame .workspace-split .workspace-tab-header-container .workspace-tab-header.is-active {
+    box-shadow: none;
+
+    &::before,
+    &::after {
+        // The .workspace-split step is needed to outrank Obsidian's own
+        // .workspace-split.mod-root rule for these fillers.
+        box-shadow: inset 0 0 0 var(--tab-outline-width) transparent,
+            0 0 0 calc(var(--tab-curve) * 4) var(--tab-background-active);
+    }
+}
+
 .anp-colorful-frame.anp-card-layout,
 .anp-colorful-frame.anp-card-layout .workspace-tab-container,
-.anp-colorful-frame.anp-card-layout.anp-mini-tab-toggle .mod-vertical .workspace-tab-header.is-active,
-.anp-colorful-frame.anp-card-layout:not(.anp-card-layout-filebrowser) .workspace-leaf-content[data-type="file-explorer"] {
+.anp-colorful-frame.anp-card-layout.anp-mini-tab-toggle .mod-vertical .workspace-tab-header.is-active {
     --tab-text-color: var(--background-secondary-alt);
     //--tab-text-color-active: var(--background-secondary-alt);
     --tab-text-color-focused: var(--background-secondary-alt);
