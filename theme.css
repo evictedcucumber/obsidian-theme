@@ -4666,8 +4666,11 @@ body.anp-border-layout .workspace-ribbon.mod-primary,
 body.anp-border-layout .workspace-ribbon.mod-primary.is-focused {
   border-right-color: var(--card-background-color);
 }
-body.anp-border-layout.is-popout-window .workspace {
+body.anp-border-layout.is-popout-window .workspace, body.anp-border-layout:not(.show-ribbon) .workspace {
   margin-left: var(--anp-border-padding, 20px);
+}
+body.anp-border-layout.is-popout-window .workspace .workspace-split.mod-left-split, body.anp-border-layout:not(.show-ribbon) .workspace .workspace-split.mod-left-split {
+  padding-left: 0;
 }
 
 body.anp-border-layout:not(.is-mobile) .workspace {
