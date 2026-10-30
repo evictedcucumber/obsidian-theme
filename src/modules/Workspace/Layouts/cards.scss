@@ -1,8 +1,10 @@
-body.anp-card-layout {
+// `:root body` stands in for the card-layout body class this was once gated on, so
+// every rule keeps the specificity it had back then.
+:root body {
     --card-background-color: rgb(var(--ctp-crust));
     --card-foreground-color: var(--background-primary);
     --divider-color: transparent;
-    --tab-outline-color: var(--background-modifier-border);
+    --tab-outline-color: transparent;
     --divider-color-hover: var(--backgrouund-modifier-border);
     --divider-width: 4px;
     --divider-width-hover: 4px;
@@ -12,19 +14,15 @@ body.anp-card-layout {
     --file-header-border: var(--border-width) dashed var(--background-modifier-border);
     --ribbon-padding: 0;
 
-    &.anp-hide-borders {
-        --tab-outline-color: transparent;
-
-        .menu {
-            border: 0px !important; // hide menu border
-        }
+    .menu {
+        border: 0px !important; // hide menu border
     }
 
     // The side docks paint their tab headers from --sidebar-tab-container-background
     // instead of --tab-container-background, which left them on Obsidian's
     // --titlebar-background while the rest of the frame used the card colour. Point
     // it at --tab-container-background as resolved here, so the side docks follow the
-    // card colour (and the colorful frame when that is on).
+    // card colour.
     .sidebar-toggle-button,
     .workspace-tabs.mod-top {
         --tab-container-background: var(--card-background-color);
@@ -32,7 +30,7 @@ body.anp-card-layout {
     }
 
     // The ribbon belongs to the frame, so it takes the frame colour rather than
-    // Obsidian's --background-secondary, exactly as the border layout does. The
+    // Obsidian's --background-secondary. The
     // ribbon's header-height ::before is painted with --titlebar-background, so that
     // needs the same colour or the top of the ribbon strip stays a shade off.
     .horizontal-main-container {
@@ -67,29 +65,20 @@ body.anp-card-layout {
         background-color: var(--tab-container-background);
     }
 
-    &.anp-card-layout-actions {
-        .workspace-ribbon.mod-primary {
-            margin-right: var(--anp-card-layout-padding, 10px);
-        }
+    .workspace-ribbon.mod-primary {
+        margin-right: 10px;
+    }
 
-        .side-dock-actions {
-            border-radius: 0px var(--anp-card-radius, var(--radius-xl)) var(--anp-card-radius, var(--radius-xl)) 0px;
-            margin-top: 2px;
-            border-width: 1px 1px 0px 1px;
-        }
+    .side-dock-actions {
+        border-radius: 0px var(--radius-xl) var(--radius-xl) 0px;
+        margin-top: 2px;
+        border-width: 1px 1px 0px 1px;
+    }
 
-        .side-dock-actions {
-            border-style: solid;
-            border-color: var(--tab-outline-color);
-            background-color: var(--card-foreground-color);
-        }
-
-        &.anp-fixed-status-bar {
-            .side-dock-settings {
-                border-width: 1px;
-                border-radius: 0px var(--anp-card-radius, var(--radius-xl)) var(--anp-card-radius, var(--radius-xl)) 0px;
-            }
-        }
+    .side-dock-actions {
+        border-style: solid;
+        border-color: var(--tab-outline-color);
+        background-color: var(--card-foreground-color);
     }
 
     .side-dock-actions {
@@ -98,7 +87,7 @@ body.anp-card-layout {
 
     .workspace-split.mod-left-split .workspace-sidedock-vault-profile {
         border: none;
-        margin: var(--anp-card-layout-padding, 10px);
+        margin: 10px;
         margin-bottom: 0;
         background-color: transparent;
     }
@@ -114,7 +103,7 @@ body.anp-card-layout {
                 // Keep the first tab clear of the card's rounded top-left corner:
                 // the tab's own curve would otherwise run into the card's corner
                 // and the pane would stop reading as a card.
-                padding-left: calc(var(--anp-card-header-left-padding, 20px) + var(--anp-card-radius, var(--radius-xl)));
+                padding-left: calc(20px + var(--radius-xl));
 
                 .workspace-tab-header-container-inner {
                     margin: 6px -5px calc(var(--tab-outline-width) * -1);
@@ -127,25 +116,21 @@ body.anp-card-layout {
     .mod-left-split,
     .mod-right-split {
         .workspace-tab-container {
-            padding-left: var(--anp-card-layout-padding, 10px);
-            padding-right: var(--anp-card-layout-padding, 10px);
+            padding-left: 10px;
+            padding-right: 10px;
             background-color: var(--tab-container-background);
         }
     }
 
     .workspace-split .workspace-leaf-content:not([data-type="file-explorer"]),
-    &.anp-card-layout-filebrowser .workspace-leaf-content[data-type="file-explorer"] {
+    .workspace-split .workspace-leaf-content[data-type="file-explorer"] {
         background-color: var(--card-foreground-color);
         border: 1px solid var(--tab-outline-color);
     }
 
-    &.anp-card-shadows {
-
-        .workspace-split .workspace-leaf-content,
-        &.anp-card-layout-actions .side-dock-actions,
-        &.anp-card-layout-filebrowser .workspace-split .workspace-leaf-content[data-type="file-explorer"] {
-            box-shadow: 0 3px 4px 0px rgba(0, 0, 0, 0.05);
-        }
+    .workspace-split .workspace-leaf-content,
+    .side-dock-actions {
+        box-shadow: 0 3px 4px 0px rgba(0, 0, 0, 0.05);
     }
 
     .workspace-split .mod-stacked .workspace-leaf-content {
@@ -162,7 +147,7 @@ body.anp-card-layout {
     .workspace .workspace-tabs.mod-stacked {
         .workspace-tab-container .workspace-tab-header {
             border-style: solid;
-            border-radius: var(--anp-card-radius, var(--radius-xl)) 0px 0px var(--anp-card-radius, var(--radius-xl));
+            border-radius: var(--radius-xl) 0px 0px var(--radius-xl);
             border-width: var(--tab-outline-width);
             border-color: var(--tab-outline-color);
             border-right: var(--tab-outline-width) dashed var(--tab-outline-color);
@@ -174,34 +159,34 @@ body.anp-card-layout {
             border-bottom-width: var(--tab-outline-width);
             border-style: solid;
             border-color: var(--tab-outline-color);
-            border-radius: 0 var(--anp-card-radius, var(--radius-xl)) var(--anp-card-radius, var(--radius-xl)) 0;
+            border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
         }
 
         .workspace-tab-container {
-            padding-bottom: var(--anp-card-layout-padding, 10px);
+            padding-bottom: 10px;
         }
     }
 
     .workspace-drop-overlay:before {
-        width: calc(100% - 6px - var(--anp-card-layout-padding, 0) * 2);
-        height: calc(100% - 6px - var(--anp-card-layout-padding, 0) * 2);
+        width: calc(100% - 6px - 0 * 2);
+        height: calc(100% - 6px - 0 * 2);
         margin: auto;
     }
 }
 
 // Apply margins & border radius if on PC
 // Only applies to phone (>=600px width)
-body.anp-card-layout:not(.is-phone) {
+:root body:not(.is-phone) {
     .mod-vertical {
         .workspace-tabs {
-            padding-left: var(--anp-card-layout-padding, 10px);
-            padding-right: var(--anp-card-layout-padding, 10px);
+            padding-left: 10px;
+            padding-right: 10px;
         }
     }
 
     .workspace-split .workspace-leaf-content:not([data-type="file-explorer"]),
-    &.anp-card-layout-filebrowser .workspace-leaf-content[data-type="file-explorer"] {
-        border-radius: var(--anp-card-radius, var(--radius-xl));
-        margin-bottom: var(--anp-card-layout-padding, 10px);
+    .workspace-split .workspace-leaf-content[data-type="file-explorer"] {
+        border-radius: var(--radius-xl);
+        margin-bottom: 10px;
     }
 }

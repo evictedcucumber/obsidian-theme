@@ -1,13 +1,12 @@
 @use 'cards.scss' as *;
-@use 'border.scss' as *;
 
-.anp-bg-fix .workspace,
-.anp-bg-fix .app-container,
-.anp-bg-fix .horizontal-main-container {
+:root .workspace,
+:root .app-container,
+:root .horizontal-main-container {
     background-color: var(--tab-container-background);
 }
 
-.anp-hide-borders {
+body {
     --tab-outline-color: transparent;
     --divider-color: transparent;
 }

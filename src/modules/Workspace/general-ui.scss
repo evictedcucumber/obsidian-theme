@@ -24,13 +24,13 @@
 }
 
 /*-Disable scrollbars-*/
-.anp-toggle-scrollbars *::-webkit-scrollbar {
+:root *::-webkit-scrollbar {
     display: none;
 }
 
 // Obsidian sets the standard scrollbar-width on `*`, which makes Chromium ignore ::-webkit-scrollbar
-.anp-toggle-scrollbars,
-.anp-toggle-scrollbars * {
+:root body,
+:root body * {
     scrollbar-width: none;
 }
 
@@ -49,11 +49,6 @@
     color: var(--text-normal);
 }
 
-/*-Disable tooltips-*/
-.anp-tooltip-toggle .tooltip {
-    display: none;
-}
-
 /*-Tab icons-*/
 .mod-left-split .workspace-tab-header.has-active-menu,
 .mod-right-split .workspace-tab-header.has-active-menu,
@@ -69,14 +64,9 @@
     background-color: var(--background-modifier-active-hover);
 }
 
-.anp-hide-status-bar .status-bar {
-    display: none;
-}
-
 .workspace,
 .horizontal-main-container,
-.anp-card-layout .mod-vertical .workspace-tabs,
-.anp-border-layout .mod-vertical .workspace-tabs {
+:root .mod-vertical .workspace-tabs {
     background-color: var(--tab-container-background);
 }
 
@@ -91,7 +81,7 @@
 
 /* Inline title visibility */
 .inline-title {
-    display: var(--anp-inline-title-vis, block);
+    display: block;
 }
 
 /* Search page hover item fix */
@@ -100,7 +90,7 @@
 }
 
 // Fix ribbon icon drag backgrounds
-.anuppuccin-accent-toggle .drag-ghost-hidden:before {
+:root .drag-ghost-hidden:before {
     background-color: rgba(var(--ctp-accent), 0.3)
 }
 
@@ -113,12 +103,4 @@
 .side-dock-ribbon,
 .workspace-ribbon.mod-primary:before {
     border: none;
-}
-
-/*-Keep the ribbon's header bar in step with the tab bar-*/
-/* Only the default layout draws a bottom border under the tab headers, so only there
-   does the ribbon's ::before need the same one; without it the frame band ran one
-   pixel further down over the ribbon than next to it. */
-body:not(.anp-card-layout):not(.anp-border-layout) .workspace-ribbon.mod-primary::before {
-    border-bottom: var(--tab-outline-width) solid var(--tab-outline-color);
 }
