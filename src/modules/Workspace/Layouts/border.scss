@@ -317,9 +317,15 @@ body.anp-border-layout {
         border-right-color: var(--card-background-color);
     }
 
-    &.is-popout-window {
+    // Without a ribbon nothing pads the left edge, so mirror the right margin
+    &.is-popout-window,
+    &:not(.show-ribbon) {
         .workspace {
             margin-left: var(--anp-border-padding, 20px);
+
+            .workspace-split.mod-left-split {
+                padding-left: 0;
+            }
         }
     }
 }
