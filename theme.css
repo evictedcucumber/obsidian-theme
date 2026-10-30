@@ -119,7 +119,7 @@ settings:
     description: Select your preferred accent
     type: class-select
     allowEmpty: false
-    default: ctp-accent-rosewater
+    default: ctp-accent-mauve
     options:
     -
         label: Rosewater
@@ -3958,13 +3958,13 @@ body.is-translucent {
   --divider-color: rgba(var(--ctp-surface0), 0.15);
 }
 
-.is-translucent:not(.is-fullscreen) .workspace-ribbon.mod-left,
+.is-translucent:not(.is-fullscreen) .workspace-ribbon.mod-primary,
 .is-translucent:not(.is-fullscreen) .workspace-tabs,
 .is-translucent:not(.is-fullscreen) .mod-left-split .workspace-tab-header-container,
 .is-translucent:not(.is-fullscreen) .mod-right-split .workspace-tab-header-container,
 .is-translucent:not(.is-fullscreen) .mod-top .workspace-tab-header-container,
 .is-translucent:not(.is-fullscreen) .workspace-tabs .workspace-leaf,
-.is-translucent:not(.is-fullscreen) .workspace-ribbon.mod-left:before,
+.is-translucent:not(.is-fullscreen) .workspace-ribbon.mod-primary:before,
 .is-translucent:not(.is-fullscreen) .workspace-split.mod-root,
 .is-translucent:not(.is-fullscreen) .workspace-split.mod-root.mod-left-split .view-content,
 .is-translucent:not(.is-fullscreen) .view-header,
@@ -4130,11 +4130,11 @@ body:not(.anp-alternate-tab-toggle):not(.anp-disable-newtab-align) .workspace-sp
   --tab-max-width-active: 300px ;
 }
 
-.anp-alternate-tab-toggle .workspace-ribbon.mod-left {
+.anp-alternate-tab-toggle .workspace-ribbon.mod-primary {
   margin-top: var(--header-height);
 }
 
-.anp-alternate-tab-toggle .workspace-ribbon.mod-left:before {
+.anp-alternate-tab-toggle .workspace-ribbon.mod-primary:before {
   padding-bottom: 0px;
 }
 
@@ -4321,6 +4321,8 @@ body.anp-card-layout {
   --divider-width: 4px;
   --divider-width-hover: 4px;
   --tab-container-background: var(--card-background-color);
+  --titlebar-background: var(--card-background-color);
+  --titlebar-background-focused: var(--card-background-color);
   --file-header-border: var(--border-width) dashed var(--background-modifier-border);
   --ribbon-padding: 0;
 }
@@ -4350,11 +4352,11 @@ body.anp-card-layout .mod-vertical,
 body.anp-card-layout .workspace-split.mod-vertical,
 body.anp-card-layout .workspace-fake-target-overlay:not(.is-in-sidebar) .workspace-tabs .workspace-leaf,
 body.anp-card-layout .mod-root .workspace-tabs .workspace-leaf,
-body.anp-card-layout .workspace-ribbon.mod-left,
-body.anp-card-layout .workspace-ribbon.mod-left:before {
+body.anp-card-layout .workspace-ribbon.mod-primary,
+body.anp-card-layout .workspace-ribbon.mod-primary:before {
   background-color: var(--tab-container-background);
 }
-body.anp-card-layout.anp-card-layout-actions .workspace-ribbon.mod-left {
+body.anp-card-layout.anp-card-layout-actions .workspace-ribbon.mod-primary {
   margin-right: var(--anp-card-layout-padding, 10px);
 }
 body.anp-card-layout.anp-card-layout-actions .side-dock-actions {
@@ -4380,11 +4382,11 @@ body.anp-card-layout .workspace-split.mod-left-split .workspace-sidedock-vault-p
   margin-bottom: 0;
   background-color: transparent;
 }
-body.anp-card-layout .workspace-ribbon.mod-left {
+body.anp-card-layout .workspace-ribbon.mod-primary {
   margin-top: calc(var(--header-height) - 1px);
 }
 body.anp-card-layout .workspace-tab-header-container,
-body.anp-card-layout .workspace-ribbon.mod-left:before {
+body.anp-card-layout .workspace-ribbon.mod-primary:before {
   border-bottom: none;
 }
 body.anp-card-layout .mod-vertical .workspace-tabs .workspace-tab-header-container {
@@ -4457,6 +4459,8 @@ body.anp-border-layout {
   --card-foreground-color: var(--background-primary);
   --border-border-style: 1px solid var(--tab-outline-color);
   --anp-border-bottom-padding: var(--anp-border-padding, 20px);
+  --titlebar-background: var(--card-background-color);
+  --titlebar-background-focused: var(--card-background-color);
 }
 body.anp-border-layout .horizontal-main-container {
   background-color: var(--card-background-color);
@@ -4632,11 +4636,11 @@ body.anp-border-layout .workspace-split.mod-right-split > .workspace-leaf-resize
 body.anp-border-layout .workspace-split {
   --divider-vertical-height: calc(100% + -1*var(--header-height));
 }
-body.anp-border-layout .workspace-ribbon.mod-left:before {
+body.anp-border-layout .workspace-ribbon.mod-primary:before {
   border-bottom: 1px solid var(--card-background-color);
 }
-body.anp-border-layout .workspace-ribbon.mod-left,
-body.anp-border-layout .workspace-ribbon.mod-left.is-focused {
+body.anp-border-layout .workspace-ribbon.mod-primary,
+body.anp-border-layout .workspace-ribbon.mod-primary.is-focused {
   border-right-color: var(--card-background-color);
 }
 body.anp-border-layout.is-popout-window .workspace {
@@ -4929,7 +4933,7 @@ Support me: https://buymeacoffee.com/AnubisNekhet
   --callout-color: rgb(var(--ctp-mauve));
 }
 .anp-callout-color-toggle .callout[data-callout=quote], .anp-callout-color-toggle .callout[data-callout=cite] {
-  --callout-color: rgb(var(--ctp-surface2));
+  --callout-color: rgb(var(--ctp-overlay2));
 }
 .anp-callout-color-toggle.anuppuccin-accent-toggle .callout[data-callout=note] {
   --callout-color: rgb(var(--ctp-accent));
@@ -6318,7 +6322,7 @@ body.anp-colorful-frame-icon-toggle-dark.theme-dark {
 .anp-colorful-frame.is-frameless.is-frameless:not(.is-hidden-frameless) .sidebar-toggle-button.mod-left {
   border-radius: 0 var(--radius-m) var(--radius-m) 0;
 }
-.anp-colorful-frame.anuppuccin-accent-toggle.anp-colorful-frame:not(.anp-card-layout, .anp-border-layout) .mod-top .workspace-tab-header-container, .anp-colorful-frame.anuppuccin-accent-toggle.anp-colorful-frame:not(.anp-card-layout, .anp-border-layout) .workspace-ribbon.mod-left:before, .anp-colorful-frame.anuppuccin-accent-toggle.anp-colorful-frame.anp-card-layout, .anp-colorful-frame.anuppuccin-accent-toggle.anp-colorful-frame.anp-card-layout .workspace-tabs.mod-top, .anp-colorful-frame.anuppuccin-accent-toggle.anp-colorful-frame.anp-card-layout .sidebar-toggle-button, .anp-colorful-frame.anuppuccin-accent-toggle.anp-colorful-frame.anp-card-layout .workspace-ribbon.mod-left:before {
+.anp-colorful-frame.anuppuccin-accent-toggle.anp-colorful-frame:not(.anp-card-layout, .anp-border-layout) .mod-top .workspace-tab-header-container, .anp-colorful-frame.anuppuccin-accent-toggle.anp-colorful-frame:not(.anp-card-layout, .anp-border-layout) .workspace-ribbon.mod-primary:before, .anp-colorful-frame.anuppuccin-accent-toggle.anp-colorful-frame.anp-card-layout, .anp-colorful-frame.anuppuccin-accent-toggle.anp-colorful-frame.anp-card-layout .workspace-tabs.mod-top, .anp-colorful-frame.anuppuccin-accent-toggle.anp-colorful-frame.anp-card-layout .sidebar-toggle-button, .anp-colorful-frame.anuppuccin-accent-toggle.anp-colorful-frame.anp-card-layout .workspace-ribbon.mod-primary:before {
   --tab-container-background: rgba(var(--anp-colorful-frame-color, var(--ctp-accent)), var(--anp-colorful-frame-opacity, 1));
   --titlebar-background: rgba(var(--anp-colorful-frame-color, var(--ctp-accent)), var(--anp-colorful-frame-opacity, 1));
 }
@@ -6339,7 +6343,7 @@ body.anp-colorful-frame-icon-toggle-dark.theme-dark {
 .anp-colorful-frame.is-focused .workspace-tabs.mod-stacked .workspace-tab-container .workspace-tab-header.is-active .workspace-tab-header-inner .workspace-tab-header-inner-close-button {
   color: var(--color-accent);
 }
-.anp-colorful-frame:not(.anp-card-layout, .anp-border-layout) .mod-top .workspace-tab-header-container, .anp-colorful-frame.anp-colorful-frame.anp-card-layout, .anp-colorful-frame.anp-colorful-frame.anp-card-layout .workspace-tabs.mod-top, .anp-colorful-frame.anp-colorful-frame.anp-card-layout .sidebar-toggle-button, .anp-colorful-frame.anp-colorful-frame.anp-card-layout .workspace-ribbon.mod-left:before, .anp-colorful-frame:not(.anp-card-layout, .anp-border-layout) .workspace-ribbon.mod-left:before {
+.anp-colorful-frame:not(.anp-card-layout, .anp-border-layout) .mod-top .workspace-tab-header-container, .anp-colorful-frame.anp-colorful-frame.anp-card-layout, .anp-colorful-frame.anp-colorful-frame.anp-card-layout .workspace-tabs.mod-top, .anp-colorful-frame.anp-colorful-frame.anp-card-layout .sidebar-toggle-button, .anp-colorful-frame.anp-colorful-frame.anp-card-layout .workspace-ribbon.mod-primary:before, .anp-colorful-frame:not(.anp-card-layout, .anp-border-layout) .workspace-ribbon.mod-primary:before {
   --tab-container-background: hsla(var(--anp-colorful-frame-color-hsl, var(--color-accent-hsl)), var(--anp-colorful-frame-opacity, 1));
   --titlebar-background: hsla(var(--anp-colorful-frame-color-hsl, var(--color-accent-hsl)), var(--anp-colorful-frame-opacity, 1));
 }
@@ -6443,19 +6447,18 @@ body.anp-colorful-frame-icon-toggle-dark.theme-dark {
 }
 
 .anp-colorful-frame .sidebar-toggle-button.sidebar-toggle-button {
-  background-color: var(--background-primary) !important;
+  background-color: transparent !important;
 }
 
 .anp-colorful-frame .sidebar-toggle-button {
   padding: var(--size-4-1) !important;
-  background-color: var(--background-primary);
-  --tab-container-background: var(--background-primary) !important;
+  background-color: transparent;
   height: calc(var(--header-height) - 5px);
   margin-right: 0;
   border-radius: 0 0 var(--radius-m) var(--radius-m);
   border-width: 0 1px 1px 1px;
   border-style: solid;
-  border-color: var(--tab-outline-color);
+  border-color: transparent;
   --icon-color: var(--text-muted);
   --icon-color-hover: var(--text-muted);
   --icon-color-active: var(--text-accent);
@@ -6601,9 +6604,9 @@ body.anp-colorful-frame.anp-card-layout .workspace,
   opacity: 0.5;
 }
 
-.anp-colorful-frame {
-  --titlebar-background: var(--anp-colorful-frame-color, var(--color-accent));
-  --titlebar-background-focused: var(--anp-colorful-frame-color, var(--color-accent));
+body.anp-colorful-frame.anp-colorful-frame {
+  --titlebar-background: rgba(var(--anp-colorful-frame-color, var(--ctp-accent)), var(--anp-colorful-frame-opacity, 1));
+  --titlebar-background-focused: rgba(var(--anp-colorful-frame-color, var(--ctp-accent)), var(--anp-colorful-frame-opacity, 1));
   --titlebar-text-color: var(--background-primary);
   --titlebar-text-color-focused: var(--background-secondary-alt);
 }
