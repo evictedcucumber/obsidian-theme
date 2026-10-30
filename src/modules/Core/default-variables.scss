@@ -1,36 +1,13 @@
 /*------------------Selecting Accents-------------------*/
-$accents: "rosewater", "flamingo", "pink", "mauve", "red", "maroon", "peach",
-    "yellow", "green", "teal", "sky", "sapphire", "blue", "lavender";
-
-@each $accent in $accents {
-    .anuppuccin-accent-toggle.ctp-accent-#{$accent} {
-        --ctp-accent: var(--ctp-#{$accent});
-    }
-
-    .theme-light.anuppuccin-accent-toggle.ctp-accent-light-#{$accent} {
-        --ctp-accent: var(--ctp-#{$accent});
-    }
-
-    .anp-bold-#{$accent} {
-        --anp-bold-color: var(--ctp-#{$accent});
-    }
-
-    .anp-italic-#{$accent} {
-        --anp-italic-color: var(--ctp-#{$accent});
-    }
-
-    .anp-highlight-#{$accent} {
-        --anp-highlight-color: var(--ctp-#{$accent});
-    }
-}
-
-// Dracula's signature purple unless the user picked a theme accent
-.theme-dark.ctp-dracula:not(.anuppuccin-accent-toggle) {
+body {
     --ctp-accent: var(--ctp-mauve);
+    --anp-bold-color: var(--ctp-peach);
+    --anp-italic-color: var(--ctp-yellow);
+    --anp-highlight-color: var(--ctp-yellow);
 }
 
 /*------------------Actual Configs--------------------*/
-.anuppuccin-accent-toggle {
+.theme-dark {
     --color-accent: rgb(var(--ctp-accent));
     --color-accent-1: rgb(var(--ctp-accent));
     --color-accent-2: rgba(var(--ctp-accent), 0.9);
@@ -55,8 +32,7 @@ $accents: "rosewater", "flamingo", "pink", "mauve", "red", "maroon", "peach",
     --icon-color-focused: rgb(var(--ctp-accent));
 }
 
-.theme-dark,
-.theme-light {
+.theme-dark {
     --mono-rgb-0: var(--ctp-crust);
     --mono-rgb-100: var(--ctp-text);
     --color-red-rgb: var(--ctp-red);
@@ -146,7 +122,7 @@ $accents: "rosewater", "flamingo", "pink", "mauve", "red", "maroon", "peach",
 // Text on accent backgrounds follows the accent's luminance (dark text on light
 // accents, light text on dark ones) instead of always using the base colour
 @supports (color: contrast-color(red)) {
-    .anuppuccin-accent-toggle {
+    .theme-dark {
         --text-on-accent: contrast-color(rgb(var(--ctp-accent)));
     }
 }
@@ -157,24 +133,10 @@ $accents: "rosewater", "flamingo", "pink", "mauve", "red", "maroon", "peach",
     --background-modifier-border: rgb(var(--ctp-surface0));
     --background-modifier-border-hover: rgb(var(--ctp-surface1));
     --background-modifier-border-focus: rgb(var(--ctp-surface2));
-    --anp-speech-bubble-opacity: var(--anp-sp-op-dark, 0.9);
+    --anp-speech-bubble-opacity: 0.9;
     --background-modifier-cover: rgba(var(--ctp-mantle), 0.4);
 
     &.theme-dark {
-        --canvas-color: rgb(var(--ctp-overlay0));
-    }
-}
-
-.theme-light {
-    color-scheme: light;
-    --highlight-mix-blend-mode: none;
-    --background-modifier-border: rgb(var(--ctp-surface1));
-    --background-modifier-border-hover: rgb(var(--ctp-surface2));
-    --background-modifier-border-focus: rgb(var(--ctp-overlay0));
-    --anp-speech-bubble-opacity: var(--anp-sp-op-light, 0.5);
-    --background-modifier-cover: #00000022;
-
-    &.theme-light {
         --canvas-color: rgb(var(--ctp-overlay0));
     }
 }
@@ -185,8 +147,12 @@ body {
     --anp-rainbow-folder-collapse-border-custom: #00000044;
     --anp-preview-width-pct: 95%;
     --anp-preview-width-max: 800px;
-    --anp-header-margin-value: 15px;
-    --anp-header-font: "Noto Serif";
+    --anp-header-margin-value: 4px;
+    --list-indent: 1em;
+    --anp-file-label-align: 1;
+    --font-text-theme: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-interface-theme: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-monospace-theme: "JetBrainsMono Nerd Font", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     --tab-stacked-pane-width: calc(var(--anp-tab-stacked-pane-width, 1) * var(--file-line-width));
     --anp-table-width-pct: 100%;
     --code-background: var(--anp-code-bg-color, var(--background-secondary-alt));
@@ -204,18 +170,4 @@ body {
     --pdf-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15), 0 2px 8px transparent;
     --pdf-sidebar-background: var(--background-primary);
     --pdf-thumbnail-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15), 0 2px 8px transparent;
-
-    &.theme-light {
-        --anp-background-image: var(--anp-background-image-light);
-        --anp-custom-bg-brightness: var(--anp-custom-bg-brightness-light);
-        --anp-custom-bg-blur: var(--anp-custom-bg-blur-light);
-        --anp-custom-bg-card-fg-opacity: var(--anp-custom-bg-card-fg-opacity-light);
-    }
-
-    &.theme-dark {
-        --anp-background-image: var(--anp-background-image-dark);
-        --anp-custom-bg-brightness: var(--anp-custom-bg-brightness-dark);
-        --anp-custom-bg-blur: var(--anp-custom-bg-blur-dark);
-        --anp-custom-bg-card-fg-opacity: var(--anp-custom-bg-card-fg-opacity-dark);
-    }
 }
