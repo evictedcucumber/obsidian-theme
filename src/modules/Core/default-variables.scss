@@ -138,6 +138,7 @@ $accents: "rosewater", "flamingo", "pink", "mauve", "red", "maroon", "peach",
     --titlebar-text-color-focused: var(--color-accent);
     --callout-title-padding: var(--size-4-2);
     --table-border-width: var(--anp-table-thickness, 1px);
+    --table-border-color: rgb(var(--ctp-overlay0));
     --icon-color-focused: var(--color-accent);
     --embed-block-shadow-hover: none; //no shadow
 }
