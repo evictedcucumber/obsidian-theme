@@ -35,7 +35,7 @@ Go to your theme folder (<code>.obsidian/themes</code>) and run:<br><br>
 Go to your AnuPuccin folder (<code>.obsidian/themes/Anuppuccin</code>) and run:<br><br>
 <pre><code>git pull</code></pre>
 <h3>Building</h3>
-Clone the github repo and run <code>make build</code> (and <code>make snippets</code> for the snippets) in the root folder. With Nix, <code>nix develop</code> provides Dart Sass and make, or <code>nix build</code> compiles everything into <code>./result</code>.
+Clone the github repo and run <code>make build</code> (and <code>make snippets</code> for the snippets) in the root folder. With Nix, <code>nix develop</code> provides Dart Sass and make, or <code>nix build</code> compiles everything into <code>./result</code>. <code>make install VAULT=/path/to/vault</code> builds and copies the theme and the extended colorschemes snippet into a vault, next to any other installed themes (set <code>VAULT</code> in an untracked <code>local.mk</code> to skip typing it).
 </details>
 
 ## Community Contributions

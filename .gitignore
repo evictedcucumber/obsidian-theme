@@ -5,3 +5,4 @@ backup/
 result
 result-*
 .direnv/
+local.mk
