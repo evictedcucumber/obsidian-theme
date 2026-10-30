@@ -11,13 +11,13 @@ body.is-translucent {
 
 .is-translucent:not(.is-fullscreen) {
 
-    .workspace-ribbon.mod-left,
+    .workspace-ribbon.mod-primary,
     .workspace-tabs,
     .mod-left-split .workspace-tab-header-container,
     .mod-right-split .workspace-tab-header-container,
     .mod-top .workspace-tab-header-container,
     .workspace-tabs .workspace-leaf,
-    .workspace-ribbon.mod-left:before,
+    .workspace-ribbon.mod-primary:before,
     .workspace-split.mod-root,
     .workspace-split.mod-root.mod-left-split .view-content,
     .view-header,

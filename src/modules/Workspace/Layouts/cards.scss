@@ -44,13 +44,13 @@ body.anp-card-layout {
     .workspace-split.mod-vertical,
     .workspace-fake-target-overlay:not(.is-in-sidebar) .workspace-tabs .workspace-leaf,
     .mod-root .workspace-tabs .workspace-leaf,
-    .workspace-ribbon.mod-left,
-    .workspace-ribbon.mod-left:before {
+    .workspace-ribbon.mod-primary,
+    .workspace-ribbon.mod-primary:before {
         background-color: var(--tab-container-background);
     }
 
     &.anp-card-layout-actions {
-        .workspace-ribbon.mod-left {
+        .workspace-ribbon.mod-primary {
             margin-right: var(--anp-card-layout-padding, 10px);
         }
 
@@ -85,12 +85,12 @@ body.anp-card-layout {
         background-color: transparent;
     }
 
-    .workspace-ribbon.mod-left {
+    .workspace-ribbon.mod-primary {
         margin-top: calc(var(--header-height) - 1px);
     }
 
     .workspace-tab-header-container,
-    .workspace-ribbon.mod-left:before {
+    .workspace-ribbon.mod-primary:before {
         border-bottom: none;
     }
 

@@ -306,12 +306,12 @@ body.anp-border-layout {
         --divider-vertical-height: calc(100% + -1*var(--header-height));
     }
 
-    .workspace-ribbon.mod-left:before {
+    .workspace-ribbon.mod-primary:before {
         border-bottom: 1px solid var(--card-background-color);
     }
 
-    .workspace-ribbon.mod-left,
-    .workspace-ribbon.mod-left.is-focused {
+    .workspace-ribbon.mod-primary,
+    .workspace-ribbon.mod-primary.is-focused {
         border-right-color: var(--card-background-color);
     }
 
