@@ -1707,6 +1707,13 @@ body.theme-light .mermaid > svg {
   filter: none !important;
 }
 
+body .mermaid > svg {
+  display: block;
+  max-width: 100% !important;
+  height: auto;
+  margin-inline: auto;
+}
+
 body .mermaid > svg:not(#_) {
   color: rgb(var(--ctp-text)) !important;
 }

@@ -84,6 +84,17 @@ body.theme-light .mermaid > svg {
     filter: none !important;
 }
 
+// Obsidian renders flowcharts and sequence diagrams at their natural
+// width, so wide ones overflow the note to the right and narrow ones
+// sit on the left. Scale wide diagrams down to the note width (as Pele
+// does in 1.15) and centre all of them.
+body .mermaid > svg {
+    display: block;
+    max-width: 100% !important;
+    height: auto;
+    margin-inline: auto;
+}
+
 // :not(#_) adds ID-level specificity so these beat Mermaid's own
 // "#mermaid-id .x { fill: ... !important }" rules
 body .mermaid > svg:not(#_) {
