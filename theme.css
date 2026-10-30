@@ -199,12 +199,11 @@ body {
   --font-monospace-theme: "JetBrainsMono Nerd Font", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --tab-stacked-pane-width: calc(var(--anp-tab-stacked-pane-width, 1) * var(--file-line-width));
   --anp-table-width-pct: 100%;
-  --code-background: var(--anp-code-bg-color, var(--background-secondary-alt));
+  --code-background: var(--background-secondary-alt);
   --canvas-color: rgb(var(--ctp-overlay2));
   --card-background-color: rgb(var(--ctp-crust));
   --card-foreground-color: rgb(var(--ctp-base));
   --tab-inactive-color: rgb(var(--ctp-mantle));
-  --code-normal: var(--anp-code-text-color, var(--text-normal));
   --callout-padding: 0;
   --callout-title-padding: var(--size-4-2);
   --callout-content-padding: var(--size-4-2);
@@ -1373,7 +1372,7 @@ body .is-live-preview .cm-line:not(.cm-active) .cm-comment-start,
 body .is-live-preview .cm-line:not(.cm-active) .cm-comment-end {
   display: none;
 }
-body .is-live-preview .cm-line:not(.cm-active) .cm-comment {
+body .is-live-preview .cm-line:not(.cm-active):not(.HyperMD-codeblock) .cm-comment {
   display: none;
 }
 
@@ -1546,6 +1545,102 @@ body .markdown-rendered.cards:not(.table-disable) table:not(.dataview) {
   width: var(--anp-table-width-pct);
   margin-left: calc(50% - var(--anp-table-width-pct) / 2);
   margin-right: calc(50% - var(--anp-table-width-pct) / 2);
+}
+
+/*---------------------------------------------------------------
+* CODE SYNTAX HIGHLIGHTING (Dracula spec)
+*
+* Obsidian highlights code with Prism in reading view (.token.*) and
+* CodeMirror in the editor (.cm-*), funnelling both through a handful
+* of --code-* variables. Those set the broad Dracula mapping below;
+* the rules after them split out the token types Obsidian groups
+* together but Dracula colours differently.
+*
+*   keywords, storage, operators, tags   pink
+*   functions, attribute names            green
+*   strings                               yellow
+*   numbers, booleans, constants          purple
+*   classes, types, built-ins             cyan
+*   parameters                            orange italic
+*   comments                              #6272A4
+*   variables, properties, punctuation    foreground
+*---------------------------------------------------------------*/
+body {
+  --code-normal: rgb(var(--ctp-text));
+  --code-comment: rgb(var(--ctp-overlay0));
+  --code-keyword: rgb(var(--ctp-pink));
+  --code-operator: rgb(var(--ctp-pink));
+  --code-tag: rgb(var(--ctp-pink));
+  --code-function: rgb(var(--ctp-green));
+  --code-string: rgb(var(--ctp-yellow));
+  --code-value: rgb(var(--ctp-mauve));
+  --code-property: rgb(var(--ctp-text));
+  --code-important: rgb(var(--ctp-peach));
+  --code-punctuation: rgb(var(--ctp-subtext1));
+}
+body .token.class-name, body .token.builtin, body .token.namespace {
+  color: rgb(var(--ctp-sky));
+}
+body .token.class-name {
+  font-style: italic;
+}
+body .token.namespace {
+  opacity: 1;
+}
+body .token.parameter {
+  color: rgb(var(--ctp-peach));
+  font-style: italic;
+}
+body .token.constant, body .token.symbol, body .token.boolean, body .token.number {
+  color: rgb(var(--ctp-mauve));
+}
+body .token.attr-name, body .token.selector, body .token.decorator, body .token.annotation, body .token.inserted {
+  color: rgb(var(--ctp-green));
+}
+body .token.attr-value, body .token.char, body .token.template-string {
+  color: rgb(var(--ctp-yellow));
+}
+body .token.regex, body .token.deleted {
+  color: rgb(var(--ctp-red));
+}
+body .token.interpolation-punctuation, body .token.escape, body .token.important {
+  color: rgb(var(--ctp-pink));
+}
+body .token.property {
+  color: rgb(var(--ctp-sky));
+}
+body .token.comment {
+  font-style: italic;
+}
+body .HyperMD-codeblock .cm-def {
+  color: rgb(var(--ctp-green));
+}
+body .HyperMD-codeblock .cm-type,
+body .HyperMD-codeblock .cm-builtin,
+body .HyperMD-codeblock .cm-variable-3 {
+  color: rgb(var(--ctp-sky));
+}
+body .HyperMD-codeblock .cm-type {
+  font-style: italic;
+}
+body .HyperMD-codeblock .cm-atom,
+body .HyperMD-codeblock .cm-number {
+  color: rgb(var(--ctp-mauve));
+}
+body .HyperMD-codeblock .cm-property {
+  color: rgb(var(--ctp-sky));
+}
+body .HyperMD-codeblock .cm-attribute {
+  color: rgb(var(--ctp-green));
+}
+body .HyperMD-codeblock .cm-meta {
+  color: rgb(var(--ctp-pink));
+}
+body .HyperMD-codeblock .cm-string-2 {
+  color: rgb(var(--ctp-red));
+}
+body .HyperMD-codeblock .cm-comment {
+  font-style: italic;
 }
 
 /*-----------------------------------
@@ -2259,16 +2354,16 @@ body [data-task="9"] {
   background: linear-gradient(to left, rgba(var(--ctp-lavender), var(--anp-speech-bubble-opacity)), rgba(var(--ctp-mauve), var(--anp-speech-bubble-opacity)));
 }
 
-body .HyperMD-codeblock-begin {
+:root .HyperMD-codeblock-begin {
   counter-reset: line-numbers;
 }
 
-body .HyperMD-codeblock.cm-line:not(.HyperMD-codeblock-begin):not(.HyperMD-codeblock-end) {
+:root .HyperMD-codeblock.cm-line:not(.HyperMD-codeblock-begin):not(.HyperMD-codeblock-end) {
   padding-left: 5em;
   position: relative;
 }
 
-body .HyperMD-codeblock.cm-line:not(.HyperMD-codeblock-begin):not(.HyperMD-codeblock-end)::before {
+:root .HyperMD-codeblock.cm-line:not(.HyperMD-codeblock-begin):not(.HyperMD-codeblock-end)::before {
   align-items: flex-end;
   border-right: 1px solid var(--scrollbar-thumb-bg);
   color: var(--text-faint);
@@ -2286,11 +2381,11 @@ body .HyperMD-codeblock.cm-line:not(.HyperMD-codeblock-begin):not(.HyperMD-codeb
   width: 3em;
 }
 
-body .HyperMD-codeblock.cm-line.cm-active:not(.HyperMD-codeblock-begin):not(.HyperMD-codeblock-end)::before {
+:root .HyperMD-codeblock.cm-line.cm-active:not(.HyperMD-codeblock-begin):not(.HyperMD-codeblock-end)::before {
   color: var(--color-accent);
 }
 
-body .HyperMD-codeblock .cm-foldPlaceholder::before {
+:root .HyperMD-codeblock .cm-foldPlaceholder::before {
   display: none;
 }
 
