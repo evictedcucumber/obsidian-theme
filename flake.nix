@@ -15,7 +15,7 @@
       forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
     in
     {
-      # `nix develop` gives a shell with everything `make build` and `make snippets` need.
+      # `nix develop` gives a shell with everything `make build` needs.
       devShells = forAllSystems (pkgs: {
         default = pkgs.mkShell {
           packages = [
@@ -26,7 +26,7 @@
         };
       });
 
-      # `nix build` compiles theme.css and the snippets into ./result.
+      # `nix build` compiles theme.css into ./result.
       packages = forAllSystems (pkgs: {
         default = pkgs.stdenvNoCC.mkDerivation {
           pname = "anuppuccin";
@@ -37,12 +37,11 @@
             pkgs.gnumake
           ];
           buildPhase = ''
-            make build snippets
+            make build
           '';
           installPhase = ''
-            mkdir -p $out/snippets
+            mkdir -p $out
             cp theme.css manifest.json $out/
-            cp snippets/*.css $out/snippets/
           '';
         };
       });
