@@ -5,7 +5,8 @@ body {
         display: none;
     }
 
-    .is-live-preview .cm-line:not(.cm-active) .cm-comment {
+    // Only Obsidian %% comments; code comments in code blocks also use .cm-comment
+    .is-live-preview .cm-line:not(.cm-active):not(.HyperMD-codeblock) .cm-comment {
         display: none;
     }
 }

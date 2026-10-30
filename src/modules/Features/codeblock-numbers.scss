@@ -1,13 +1,13 @@
-body .HyperMD-codeblock-begin {
+:root .HyperMD-codeblock-begin {
     counter-reset: line-numbers;
 }
 
-body .HyperMD-codeblock.cm-line:not(.HyperMD-codeblock-begin):not(.HyperMD-codeblock-end) {
+:root .HyperMD-codeblock.cm-line:not(.HyperMD-codeblock-begin):not(.HyperMD-codeblock-end) {
     padding-left: 5em;
     position: relative;
 }
 
-body .HyperMD-codeblock.cm-line:not(.HyperMD-codeblock-begin):not(.HyperMD-codeblock-end)::before {
+:root .HyperMD-codeblock.cm-line:not(.HyperMD-codeblock-begin):not(.HyperMD-codeblock-end)::before {
     align-items: flex-end;
     border-right: 1px solid var(--scrollbar-thumb-bg);
     color: var(--text-faint);
@@ -25,10 +25,10 @@ body .HyperMD-codeblock.cm-line:not(.HyperMD-codeblock-begin):not(.HyperMD-codeb
     width: 3em;
 }
 
-body .HyperMD-codeblock.cm-line.cm-active:not(.HyperMD-codeblock-begin):not(.HyperMD-codeblock-end)::before {
+:root .HyperMD-codeblock.cm-line.cm-active:not(.HyperMD-codeblock-begin):not(.HyperMD-codeblock-end)::before {
     color: var(--color-accent);
 }
 
-body .HyperMD-codeblock .cm-foldPlaceholder::before {
+:root .HyperMD-codeblock .cm-foldPlaceholder::before {
     display: none;
 }
