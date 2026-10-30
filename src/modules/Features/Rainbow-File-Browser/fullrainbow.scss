@@ -1,30 +1,71 @@
 /*---------------------------------------------------------------
 * FULL RAINBOW STYLE
+*
+* Each top-level folder keeps its colour as a solid title bar, while
+* its contents sit on the sidebar background with a light tint of that
+* colour, so file names stay readable on the saturated Dracula palette.
 *---------------------------------------------------------------*/
 body {
+    .nav-files-container>div>.nav-folder {
+        // Resolved here so nested folders (which cycle their own
+        // --rainbow-folder-color) still use the top-level colour
+        --rainbow-color: rgb(var(--rainbow-folder-color));
 
-    // Apply styling to folders
-    .nav-files-container>div>.nav-folder .nav-folder-title,
-    .nav-files-container>div>.nav-folder .nav-file-title,
-    .nav-files-container .collapse-icon svg.svg-icon,
-    .tree-item-self .tree-item-icon {
-        color: var(--background-primary);
-        --icon-color: var(--background-primary);
-    }
+        transition: background-color 0.4s;
+        background-color: color-mix(in srgb, var(--rainbow-color) 12%, var(--background-secondary));
+        margin-bottom: 2px;
+        border-radius: 5px;
 
-    // Apply styling to files in folders
-    &:not(.is-grabbing) .nav-files-container>div {
+        // Solid colour bar with dark text for the folder itself
+        >.nav-folder-title {
+            background-color: var(--rainbow-color);
+            border-radius: 5px;
+            font-weight: var(--font-semibold);
 
-        // Files have a slight background
-        &>.nav-folder .nav-folder-title:hover,
-        .nav-file .nav-file-title:hover {
-            background-color: rgba(var(--ctp-base), 0.1);
+            &,
+            .nav-folder-title-content,
+            .collapse-icon svg.svg-icon,
+            .tree-item-icon {
+                color: rgb(var(--ctp-crust));
+                --icon-color: rgb(var(--ctp-crust));
+            }
         }
 
-        // Background is intensified upon grabbing or selection
-        &>.nav-folder .nav-file-title.is-active {
-            border-color: rgba(var(--ctp-base), 0.2);
-            background-color: rgba(var(--ctp-base), 0.2);
+        // Contents: normal text, icons and guides in the folder colour
+        .nav-folder-children {
+            border-color: color-mix(in srgb, var(--rainbow-color) 45%, transparent);
+
+            // Obsidian's muted nav text drops below 4.5:1 on the tint
+            .nav-folder-title,
+            .nav-file-title {
+                color: rgb(var(--ctp-subtext1));
+            }
+
+            .collapse-icon svg.svg-icon,
+            .tree-item-icon {
+                color: var(--rainbow-color);
+                --icon-color: var(--rainbow-color);
+            }
+        }
+    }
+
+    &:not(.is-grabbing) .nav-files-container>div>.nav-folder {
+        >.nav-folder-title:hover {
+            background-color: color-mix(in srgb, var(--rainbow-color) 85%, white);
+        }
+
+        .nav-folder-children {
+
+            .nav-folder-title:hover,
+            .nav-file-title:hover {
+                background-color: color-mix(in srgb, var(--rainbow-color) 18%, transparent);
+            }
+
+            .nav-file-title.is-active {
+                border-color: color-mix(in srgb, var(--rainbow-color) 40%, transparent);
+                background-color: color-mix(in srgb, var(--rainbow-color) 30%, transparent);
+                color: var(--text-normal);
+            }
         }
     }
 
@@ -55,21 +96,7 @@ body {
         }
 
         >div {
-            >.nav-folder {
-                transition: background-color 0.4s;
-                background-color: rgba(var(--rainbow-folder-color),
-                        var(--anp-rainbow-folder-bg-opacity));
-                margin-bottom: 2px;
-                border-radius: 5px;
-
-                .nav-folder-children {
-                    border-color: rgba(var(--ctp-crust), 0.4);
-                }
-            }
-
             >.nav-file.has-focus {
-                background-color: rgba(var(--ctp-text),
-                        var(--anp-rainbow-folder-bg-opacity));
                 border-left: none;
                 border-color: rgb(var(--ctp-accent));
             }
