@@ -76,9 +76,6 @@ settings:
             label: Dark (Generic)
             value: ctp-generic-dark
         -
-            label: Dracula
-            value: ctp-dracula
-        -
             label: Everforest
             value: ctp-everforest-dark
         -
@@ -124,7 +121,6 @@ settings:
 @use "ext-colorschemes/atom-light.scss" as *;
 @use "ext-colorschemes/biscuit-dark.scss" as *;
 @use "ext-colorschemes/coffee-dark.scss" as *;
-@use "ext-colorschemes/dracula.scss" as *;
 @use "ext-colorschemes/everforest-light.scss" as *;
 @use "ext-colorschemes/everforest-dark.scss" as *;
 @use "ext-colorschemes/flexoki-dark.scss" as *;
@@ -154,7 +150,7 @@ $ext-color-list: "rosewater", "flamingo", "pink", "mauve", "red", "maroon",
 	"surface1", "surface0", "base", "mantle", "crust";
 
 $ext-theme-list: $theme-atom-light, $theme-amoled-dark, $theme-atom-dark,
-	$theme-biscuit-dark, $theme-coffee-dark, $theme-dracula,
+	$theme-biscuit-dark, $theme-coffee-dark,
 	$theme-everforest-light, $theme-everforest-dark, $theme-flexoki-dark,
 	$theme-generic-dark, $theme-gruvbox-dark, $theme-gruvbox-light,
 	$theme-kanagawa-dark, $theme-luminescence-light, $theme-material-mint-light,
@@ -203,10 +199,6 @@ $ext-theme-list: $theme-atom-light, $theme-amoled-dark, $theme-atom-dark,
 	--ctp-ext-base: 10, 10, 10 !important;
 	--ctp-ext-mantle: 5, 5, 5 !important;
 	--ctp-ext-crust: 0, 0, 0 !important;
-}
-
-.theme-dark.anp-theme-ext-dark.ctp-dracula:not(.anuppuccin-accent-toggle) {
-	--ctp-accent: var(--ctp-mauve);
 }
 
 @each $theme-name in $ext-theme-list {

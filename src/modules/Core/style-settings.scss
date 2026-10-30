@@ -32,7 +32,7 @@ settings:
     description: Select your preferred dark mode flavor
     type: class-select
     allowEmpty: false
-    default: ctp-mocha
+    default: ctp-dracula
     options:
     -
         label: Frappe
@@ -46,6 +46,9 @@ settings:
     -
         label: Mocha Old
         value: ctp-mocha-old
+    -
+        label: Dracula
+        value: ctp-dracula
 -
     id: anuppuccin-light-theme-accents
     title: Light Theme Accent

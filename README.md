@@ -35,7 +35,7 @@ Go to your theme folder (<code>.obsidian/themes</code>) and run:<br><br>
 Go to your AnuPuccin folder (<code>.obsidian/themes/Anuppuccin</code>) and run:<br><br>
 <pre><code>git pull</code></pre>
 <h3>Building</h3>
-Clone the github repo and run <code>make build</code> (and <code>make snippets</code> for the snippets) in the root folder. With Nix, <code>nix develop</code> provides Dart Sass and make, or <code>nix build</code> compiles everything into <code>./result</code>. <code>make install VAULT=/path/to/vault</code> builds and copies the theme and the extended colorschemes snippet into a vault, next to any other installed themes (set <code>VAULT</code> in an untracked <code>local.mk</code> to skip typing it).
+Clone the github repo and run <code>make build</code> (and <code>make snippets</code> for the snippets) in the root folder. With Nix, <code>nix develop</code> provides Dart Sass and make, or <code>nix build</code> compiles everything into <code>./result</code>. <code>make install VAULT=/path/to/vault</code> builds and copies the theme into a vault, next to any other installed themes (set <code>VAULT</code> in an untracked <code>local.mk</code> to skip typing it).
 </details>
 
 ## Community Contributions
@@ -154,7 +154,7 @@ Markdown embeds have an alternate styling with an animated variant which can be 
 | Coffee                                                    | No         | Yes       | Custom colorscheme                                                                                                          |
 | [Biscuit](https://github.com/Biscuit-Colorscheme/biscuit) | Yes        | Yes       | -                                                                                                                           |
 | [Everforest](https://github.com/sainnhe/everforest)       | Yes        | Yes       | -                                                                                                                           |
-| [Dracula](https://github.com/dracula/dracula-theme)       | No         | Yes       | -                                                                                                                           |
+| [Dracula](https://github.com/dracula/dracula-theme)       | No         | Yes       | Built into the base theme (default dark flavor); no snippet needed.                                                         |
 | [Gruvbox](https://github.com/morhetz/gruvbox)             | Yes        | Yes       | -                                                                                                                           |
 | [Nord](https://github.com/arcticicestudio/nord)           | Yes        | Yes       | A custom darker variant of the dark theme is included as well. <br> Accent value is hardcoded into the theme.               |
 | Notion                                                    | Yes        | Yes       | -                                                                                                                           |

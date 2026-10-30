@@ -2,7 +2,6 @@
 -include local.mk
 
 THEME_NAME := $(shell sed -n 's/.*"name": *"\([^"]*\)".*/\1/p' manifest.json)
-SNIPPET_PREFIX := $(shell echo '$(THEME_NAME)' | tr 'A-Z ' 'a-z-')
 
 .PHONY: build
 build: ## Build CSS
@@ -17,12 +16,11 @@ snippets: ## Build CSS for snippets
 	sass snippets/src/floating-search-bar.scss snippets/floating-search-bar.css --no-source-map
 
 .PHONY: install
-install: build snippets ## Copy theme and snippets into $(VAULT), alongside any other installed themes
+install: build ## Copy the theme into $(VAULT), alongside any other installed themes
 	@test -n "$(VAULT)" || { echo 'Set VAULT, e.g. make install VAULT="/mnt/c/Users/me/Documents/Vault" (or put it in local.mk)'; exit 1; }
 	@test -d "$(VAULT)/.obsidian" || { echo '$(VAULT) is not an Obsidian vault'; exit 1; }
-	mkdir -p "$(VAULT)/.obsidian/themes/$(THEME_NAME)" "$(VAULT)/.obsidian/snippets"
+	mkdir -p "$(VAULT)/.obsidian/themes/$(THEME_NAME)"
 	cp theme.css manifest.json "$(VAULT)/.obsidian/themes/$(THEME_NAME)/"
-	cp snippets/extended-colorschemes.css "$(VAULT)/.obsidian/snippets/$(SNIPPET_PREFIX)-extended-colorschemes.css"
 
 .PHONY: help
 help: ## Display help

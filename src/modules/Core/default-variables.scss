@@ -24,6 +24,11 @@ $accents: "rosewater", "flamingo", "pink", "mauve", "red", "maroon", "peach",
     }
 }
 
+// Dracula's signature purple unless the user picked a theme accent
+.theme-dark.ctp-dracula:not(.anuppuccin-accent-toggle) {
+    --ctp-accent: var(--ctp-mauve);
+}
+
 /*------------------Actual Configs--------------------*/
 .anuppuccin-accent-toggle {
     --color-accent: rgb(var(--ctp-accent));
