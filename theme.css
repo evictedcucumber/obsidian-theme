@@ -159,6 +159,11 @@ body {
   --callout-title-padding: var(--size-4-2);
   --table-border-width: var(--anp-table-thickness, 1px);
   --table-border-color: rgb(var(--ctp-overlay0));
+  --anp-table-grid-color: color-mix(in srgb, rgb(var(--ctp-overlay0)) 45%, transparent);
+  --anp-table-header-background: rgb(var(--ctp-surface1));
+  --anp-table-header-color: rgb(var(--ctp-mauve));
+  --anp-table-stripe: rgb(var(--ctp-surface0));
+  --anp-table-hover: color-mix(in srgb, rgb(var(--ctp-accent)) 12%, transparent);
   --icon-color-focused: var(--color-accent);
   --embed-block-shadow-hover: none;
 }
@@ -1414,30 +1419,53 @@ body .math-block {
 
 /*-Recolor table borders-*/
 body .markdown-preview-view:not(.cards):not(.table-disable) table,
+body .markdown-preview-view.cards:not(.table-disable) table:not(.dataview),
+body .is-live-preview:not(.cards):not(.table-disable) table,
+body .is-live-preview.cards:not(.table-disable) table:not(.dataview) {
+  border: 1px solid var(--table-border-color);
+}
 body .markdown-preview-view:not(.cards):not(.table-disable) table td,
 body .markdown-preview-view:not(.cards):not(.table-disable) table th,
 body .markdown-preview-view:not(.cards):not(.table-disable) table thead tr > th:first-child,
 body .markdown-preview-view:not(.cards):not(.table-disable) table thead tr > th,
 body .markdown-preview-view:not(.cards):not(.table-disable) table thead tr > th:last-child,
-body .markdown-preview-view.cards:not(.table-disable) table:not(.dataview),
 body .markdown-preview-view.cards:not(.table-disable) table:not(.dataview) td,
 body .markdown-preview-view.cards:not(.table-disable) table:not(.dataview) th,
 body .markdown-preview-view.cards:not(.table-disable) table:not(.dataview) thead tr > th:first-child,
 body .markdown-preview-view.cards:not(.table-disable) table:not(.dataview) thead tr > th,
 body .markdown-preview-view.cards:not(.table-disable) table:not(.dataview) thead tr > th:last-child,
-body .is-live-preview:not(.cards):not(.table-disable) table,
 body .is-live-preview:not(.cards):not(.table-disable) table td,
 body .is-live-preview:not(.cards):not(.table-disable) table th,
 body .is-live-preview:not(.cards):not(.table-disable) table thead tr > th:first-child,
 body .is-live-preview:not(.cards):not(.table-disable) table thead tr > th,
 body .is-live-preview:not(.cards):not(.table-disable) table thead tr > th:last-child,
-body .is-live-preview.cards:not(.table-disable) table:not(.dataview),
 body .is-live-preview.cards:not(.table-disable) table:not(.dataview) td,
 body .is-live-preview.cards:not(.table-disable) table:not(.dataview) th,
 body .is-live-preview.cards:not(.table-disable) table:not(.dataview) thead tr > th:first-child,
 body .is-live-preview.cards:not(.table-disable) table:not(.dataview) thead tr > th,
 body .is-live-preview.cards:not(.table-disable) table:not(.dataview) thead tr > th:last-child {
-  border: 1px solid var(--table-border-color);
+  border: 1px solid var(--anp-table-grid-color);
+}
+body .markdown-preview-view:not(.cards):not(.table-disable) table thead tr > th,
+body .markdown-preview-view:not(.cards):not(.table-disable) table thead tr > th:first-child,
+body .markdown-preview-view:not(.cards):not(.table-disable) table thead tr > th:last-child,
+body .markdown-preview-view.cards:not(.table-disable) table:not(.dataview) thead tr > th,
+body .markdown-preview-view.cards:not(.table-disable) table:not(.dataview) thead tr > th:first-child,
+body .markdown-preview-view.cards:not(.table-disable) table:not(.dataview) thead tr > th:last-child,
+body .is-live-preview:not(.cards):not(.table-disable) table thead tr > th,
+body .is-live-preview:not(.cards):not(.table-disable) table thead tr > th:first-child,
+body .is-live-preview:not(.cards):not(.table-disable) table thead tr > th:last-child,
+body .is-live-preview.cards:not(.table-disable) table:not(.dataview) thead tr > th,
+body .is-live-preview.cards:not(.table-disable) table:not(.dataview) thead tr > th:first-child,
+body .is-live-preview.cards:not(.table-disable) table:not(.dataview) thead tr > th:last-child {
+  color: var(--anp-table-header-color);
+  border-bottom: 2px solid var(--anp-table-header-color);
+}
+body .markdown-preview-view:not(.cards):not(.table-disable) table tbody tr:hover td,
+body .markdown-preview-view.cards:not(.table-disable) table:not(.dataview) tbody tr:hover td,
+body .is-live-preview:not(.cards):not(.table-disable) table tbody tr:hover td,
+body .is-live-preview.cards:not(.table-disable) table:not(.dataview) tbody tr:hover td {
+  background-color: var(--anp-table-hover);
 }
 body .markdown-preview-view:not(.cards):not(.table-disable) table th:not([align]),
 body .markdown-preview-view:not(.cards):not(.table-disable) table thead tr > th:first-child:not([align]),
@@ -1472,29 +1500,29 @@ body .markdown-preview-view:not(.cards):not(.table-disable) th,
 body .markdown-preview-view.cards:not(.table-disable) table:not(.dataview) th,
 body .is-live-preview:not(.cards):not(.table-disable) th,
 body .is-live-preview.cards:not(.table-disable) table:not(.dataview) th {
-  background-color: rgba(var(--ctp-mantle), 0.5);
+  background-color: var(--anp-table-header-background);
 }
 body .markdown-preview-view:not(.cards):not(.table-disable) tr:nth-child(2n) td,
 body .markdown-preview-view.cards:not(.table-disable) table:not(.dataview) tr:nth-child(2n) td,
 body .is-live-preview:not(.cards):not(.table-disable) tr:nth-child(2n) td,
 body .is-live-preview.cards:not(.table-disable) table:not(.dataview) tr:nth-child(2n) td {
-  background-color: rgba(var(--ctp-mantle), 0.5);
+  background-color: var(--anp-table-stripe);
 }
 
 .th-highlight.markdown-preview-view:not(.cards):not(.table-disable) th, .th-highlight.markdown-preview-view.cards:not(.table-disable) table:not(.dataview) th, .th-highlight.is-live-preview:not(.cards):not(.table-disable) th, .th-highlight.is-live-preview.cards:not(.table-disable) table:not(.dataview) th {
-  background-color: rgba(var(--ctp-mantle), 0.5);
+  background-color: var(--anp-table-header-background);
 }
 
 .row-alt.markdown-preview-view:not(.cards):not(.table-disable) tr:nth-child(2n) td, .row-alt.markdown-preview-view.cards:not(.table-disable) table:not(.dataview) tr:nth-child(2n) td, .row-alt.is-live-preview:not(.cards):not(.table-disable) tr:nth-child(2n) td, .row-alt.is-live-preview.cards:not(.table-disable) table:not(.dataview) tr:nth-child(2n) td {
-  background-color: rgba(var(--ctp-mantle), 0.5);
+  background-color: var(--anp-table-stripe);
 }
 
 .col-alt.markdown-preview-view:not(.cards):not(.table-disable) tr td:nth-child(2n), .col-alt.markdown-preview-view.cards:not(.table-disable) table:not(.dataview) tr td:nth-child(2n), .col-alt.is-live-preview:not(.cards):not(.table-disable) tr td:nth-child(2n), .col-alt.is-live-preview.cards:not(.table-disable) table:not(.dataview) tr td:nth-child(2n) {
-  background-color: rgba(var(--ctp-mantle), 0.5);
+  background-color: var(--anp-table-stripe);
 }
 
 .table-full.markdown-preview-view:not(.cards):not(.table-disable) td, .table-full.markdown-preview-view.cards:not(.table-disable) table:not(.dataview) td, .table-full.is-live-preview:not(.cards):not(.table-disable) td, .table-full.is-live-preview.cards:not(.table-disable) table:not(.dataview) td {
-  background-color: rgba(var(--ctp-mantle), 0.5);
+  background-color: var(--anp-table-stripe);
 }
 
 .checkered.markdown-preview-view:not(.cards):not(.table-disable) tr td:nth-child(2n),
@@ -1502,10 +1530,10 @@ body .is-live-preview.cards:not(.table-disable) table:not(.dataview) tr:nth-chil
 .checkered.markdown-preview-view.cards:not(.table-disable) table:not(.dataview) tr:nth-child(2n) td, .checkered.is-live-preview:not(.cards):not(.table-disable) tr td:nth-child(2n),
 .checkered.is-live-preview:not(.cards):not(.table-disable) tr:nth-child(2n) td, .checkered.is-live-preview.cards:not(.table-disable) table:not(.dataview) tr td:nth-child(2n),
 .checkered.is-live-preview.cards:not(.table-disable) table:not(.dataview) tr:nth-child(2n) td {
-  background-color: rgba(var(--ctp-mantle), 0.5);
+  background-color: var(--anp-table-stripe);
 }
 .checkered.markdown-preview-view:not(.cards):not(.table-disable) tr:nth-child(2n) td:nth-child(2n), .checkered.markdown-preview-view.cards:not(.table-disable) table:not(.dataview) tr:nth-child(2n) td:nth-child(2n), .checkered.is-live-preview:not(.cards):not(.table-disable) tr:nth-child(2n) td:nth-child(2n), .checkered.is-live-preview.cards:not(.table-disable) table:not(.dataview) tr:nth-child(2n) td:nth-child(2n) {
-  background-color: rgba(var(--ctp-crust), 0.5);
+  background-color: var(--anp-table-header-background);
 }
 
 body .markdown-rendered:not(.cards):not(.table-disable) table,
