@@ -6,13 +6,29 @@ body {
     .is-live-preview:not(.cards):not(.table-disable) table,
     .is-live-preview.cards:not(.table-disable) table:not(.dataview) {
 
-        &,
+        // Clear outer frame, softer inner grid
+        & {
+            border: 1px solid var(--table-border-color);
+        }
+
         td,
         th,
         thead tr>th:first-child,
         thead tr>th,
         thead tr>th:last-child {
-            border: 1px solid var(--table-border-color);
+            border: 1px solid var(--anp-table-grid-color);
+        }
+
+        // Header reads as a bar: purple bold text over a purple underline
+        thead tr>th,
+        thead tr>th:first-child,
+        thead tr>th:last-child {
+            color: var(--anp-table-header-color);
+            border-bottom: 2px solid var(--anp-table-header-color);
+        }
+
+        tbody tr:hover td {
+            background-color: var(--anp-table-hover);
         }
 
         th:not([align]),
@@ -40,19 +56,19 @@ $table-styling: th-highlight, row-alt, col-alt, full, checkered;
 @mixin styling($style) {
     @if $style ==th-highlight {
         th {
-            background-color: rgba(var(--ctp-mantle), 0.5);
+            background-color: var(--anp-table-header-background);
         }
     }
 
     @if $style ==row-alt {
         tr:nth-child(2n) td {
-            background-color: rgba(var(--ctp-mantle), 0.5);
+            background-color: var(--anp-table-stripe);
         }
     }
 
     @if $style ==col-alt {
         tr td:nth-child(2n) {
-            background-color: rgba(var(--ctp-mantle), 0.5);
+            background-color: var(--anp-table-stripe);
         }
     }
 
@@ -60,17 +76,17 @@ $table-styling: th-highlight, row-alt, col-alt, full, checkered;
 
         tr td:nth-child(2n),
         tr:nth-child(2n) td {
-            background-color: rgba(var(--ctp-mantle), 0.5);
+            background-color: var(--anp-table-stripe);
         }
 
         tr:nth-child(2n) td:nth-child(2n) {
-            background-color: rgba(var(--ctp-crust), 0.5);
+            background-color: var(--anp-table-header-background);
         }
     }
 
     @if $style ==full {
         td {
-            background-color: rgba(var(--ctp-mantle), 0.5);
+            background-color: var(--anp-table-stripe);
         }
     }
 }

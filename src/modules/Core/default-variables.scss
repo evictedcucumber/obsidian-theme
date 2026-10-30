@@ -115,6 +115,11 @@ body {
     --callout-title-padding: var(--size-4-2);
     --table-border-width: var(--anp-table-thickness, 1px);
     --table-border-color: rgb(var(--ctp-overlay0));
+    --anp-table-grid-color: color-mix(in srgb, rgb(var(--ctp-overlay0)) 45%, transparent);
+    --anp-table-header-background: rgb(var(--ctp-surface1));
+    --anp-table-header-color: rgb(var(--ctp-mauve));
+    --anp-table-stripe: rgb(var(--ctp-surface0));
+    --anp-table-hover: color-mix(in srgb, rgb(var(--ctp-accent)) 12%, transparent);
     --icon-color-focused: var(--color-accent);
     --embed-block-shadow-hover: none; //no shadow
 }
