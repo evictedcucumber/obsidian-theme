@@ -1547,6 +1547,24 @@ body .markdown-rendered.cards:not(.table-disable) table:not(.dataview) {
   margin-right: calc(50% - var(--anp-table-width-pct) / 2);
 }
 
+body {
+  --bases-table-border-color: var(--anp-table-grid-color);
+  --bases-table-header-background: var(--anp-table-header-background);
+  --bases-table-header-background-hover: color-mix(in srgb, var(--anp-table-header-color) 15%, var(--anp-table-header-background));
+  --bases-table-header-color: var(--anp-table-header-color);
+  --bases-table-header-weight: var(--font-semibold);
+  --bases-table-row-background-hover: var(--anp-table-hover);
+}
+body .bases-view {
+  --table-border-color: var(--anp-table-grid-color);
+}
+body .bases-thead {
+  border-bottom: 2px solid var(--anp-table-header-color);
+}
+body .bases-tbody {
+  background-image: repeating-linear-gradient(to bottom, transparent 0 var(--bases-table-row-height), var(--anp-table-stripe) var(--bases-table-row-height) calc(2 * var(--bases-table-row-height)));
+}
+
 /*---------------------------------------------------------------
 * CODE SYNTAX HIGHLIGHTING (Dracula spec)
 *
