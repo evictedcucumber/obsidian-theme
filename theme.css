@@ -1643,6 +1643,1010 @@ body .HyperMD-codeblock .cm-comment {
   font-style: italic;
 }
 
+/*---------------------------------------------------------------
+* DIAGRAMS (Dracula)
+*
+* Pele (Obsidian's upcoming diagram renderer) draws inline
+* <svg class="pele"> and reads its colours from --pele-* custom
+* properties, so a single palette mapping covers every diagram type.
+*
+* The variables are set on body and again on the svg itself: the
+* second rule beats any container rule Obsidian sets for its own
+* --mermaid-* variables (1.15 names unknown at time of writing;
+* map them here once its app.css is available).
+*---------------------------------------------------------------*/
+body,
+body svg.pele {
+  --pele-bg: var(--background-primary);
+  --pele-fg: rgb(var(--ctp-text));
+  --pele-muted: rgb(var(--ctp-subtext0));
+  --pele-line: rgb(var(--ctp-subtext0));
+  --pele-surface: rgb(var(--ctp-surface2));
+  --pele-surface-alt: rgb(var(--ctp-surface0));
+  --pele-border: rgb(var(--ctp-mauve));
+  --pele-accent: rgb(var(--ctp-mauve));
+  --pele-critical: rgb(var(--ctp-red));
+  --pele-error: rgb(var(--ctp-red));
+  --pele-fg-on-light: rgb(var(--ctp-crust));
+  --pele-fg-on-dark: rgb(var(--ctp-text));
+  --pele-series-1: rgb(var(--ctp-mauve));
+  --pele-series-2: rgb(var(--ctp-pink));
+  --pele-series-3: rgb(var(--ctp-sky));
+  --pele-series-4: rgb(var(--ctp-green));
+  --pele-series-5: rgb(var(--ctp-peach));
+  --pele-series-6: rgb(var(--ctp-yellow));
+  --pele-series-7: rgb(var(--ctp-red));
+  --pele-series-8: rgb(var(--ctp-overlay0));
+  --pele-radius: 6px;
+  --pele-font: var(--font-text);
+  --pele-font-mono: var(--font-monospace);
+  --pele-title-weight: 600;
+  --pele-heading-weight: 600;
+  --pele-bold-weight: 600;
+}
+
+/*---------------------------------------------------------------
+* MERMAID (Obsidian 1.14, Mermaid 11)
+*
+* Obsidian renders Mermaid with the light "default" theme and, in
+* dark mode, inverts the whole svg with a CSS filter. The filter is
+* switched off here and the same Dracula mapping as the Pele
+* variables above is applied directly. Mermaid injects a <style>
+* scoped to #mermaid-<id> into every svg, so !important is needed
+* to override it.
+*
+*   node fill / border    surface2 / mauve
+*   subgraph / box fill   surface0
+*   lines, arrowheads     subtext0
+*   text                  text (crust on bright fills)
+*   series                mauve, pink, sky, green, peach, yellow,
+*                         red, overlay0
+*---------------------------------------------------------------*/
+body.theme-dark .mermaid > svg,
+body.theme-light .mermaid > svg {
+  filter: none !important;
+}
+
+body .mermaid > svg:not(#_) {
+  color: rgb(var(--ctp-text)) !important;
+}
+body .mermaid > svg:not(#_) text,
+body .mermaid > svg:not(#_) tspan,
+body .mermaid > svg:not(#_) .label,
+body .mermaid > svg:not(#_) .label text,
+body .mermaid > svg:not(#_) .nodeLabel,
+body .mermaid > svg:not(#_) .edgeLabel,
+body .mermaid > svg:not(#_) .edgeLabel p,
+body .mermaid > svg:not(#_) .label p,
+body .mermaid > svg:not(#_) span,
+body .mermaid > svg:not(#_) p {
+  fill: rgb(var(--ctp-text)) !important;
+  color: rgb(var(--ctp-text)) !important;
+}
+body .mermaid > svg:not(#_) .node rect,
+body .mermaid > svg:not(#_) .node circle,
+body .mermaid > svg:not(#_) .node ellipse,
+body .mermaid > svg:not(#_) .node polygon,
+body .mermaid > svg:not(#_) .node path:not(.node-line),
+body .mermaid > svg:not(#_) .basic.label-container,
+body .mermaid > svg:not(#_) .label-container {
+  fill: rgb(var(--ctp-surface2)) !important;
+  stroke: rgb(var(--ctp-mauve)) !important;
+}
+body .mermaid > svg:not(#_) .node .label-container.outer-path,
+body .mermaid > svg:not(#_) .node path.label-container {
+  fill: rgb(var(--ctp-surface2)) !important;
+}
+body .mermaid > svg:not(#_) .edgePath path,
+body .mermaid > svg:not(#_) path.flowchart-link,
+body .mermaid > svg:not(#_) path.relation,
+body .mermaid > svg:not(#_) path.relationshipLine,
+body .mermaid > svg:not(#_) path.transition,
+body .mermaid > svg:not(#_) .edge-thickness-normal,
+body .mermaid > svg:not(#_) .flowchart-link,
+body .mermaid > svg:not(#_) .messageLine0,
+body .mermaid > svg:not(#_) .messageLine1,
+body .mermaid > svg:not(#_) .task-line,
+body .mermaid > svg:not(#_) .actor-line,
+body .mermaid > svg:not(#_) .loopLine,
+body .mermaid > svg:not(#_) .cluster-edge,
+body .mermaid > svg:not(#_) .divider {
+  stroke: rgb(var(--ctp-subtext0)) !important;
+}
+body .mermaid > svg:not(#_) .edgePath path.path,
+body .mermaid > svg:not(#_) path.relation,
+body .mermaid > svg:not(#_) path.relationshipLine,
+body .mermaid > svg:not(#_) path.transition,
+body .mermaid > svg:not(#_) path.flowchart-link {
+  fill: none !important;
+}
+body .mermaid > svg:not(#_) marker,
+body .mermaid > svg:not(#_) marker path,
+body .mermaid > svg:not(#_) marker circle,
+body .mermaid > svg:not(#_) .arrowMarkerPath,
+body .mermaid > svg:not(#_) .arrowheadPath,
+body .mermaid > svg:not(#_) .marker,
+body .mermaid > svg:not(#_) .marker.cross {
+  fill: rgb(var(--ctp-subtext0)) !important;
+  stroke: rgb(var(--ctp-subtext0)) !important;
+}
+body .mermaid > svg:not(#_) marker.er path,
+body .mermaid > svg:not(#_) marker.er circle {
+  fill: rgb(var(--ctp-base)) !important;
+}
+body .mermaid > svg:not(#_) .edgeLabel,
+body .mermaid > svg:not(#_) .edgeLabel p,
+body .mermaid > svg:not(#_) .labelBkg,
+body .mermaid > svg:not(#_) .edgeLabel .label rect,
+body .mermaid > svg:not(#_) .edgeLabel rect {
+  background-color: rgb(var(--ctp-base)) !important;
+  fill: rgb(var(--ctp-base)) !important;
+}
+body .mermaid > svg:not(#_) .edgeLabel .label text,
+body .mermaid > svg:not(#_) .edgeLabel span,
+body .mermaid > svg:not(#_) .edgeLabel p {
+  fill: rgb(var(--ctp-text)) !important;
+  color: rgb(var(--ctp-text)) !important;
+  background-color: transparent !important;
+}
+body .mermaid > svg:not(#_) .cluster rect,
+body .mermaid > svg:not(#_) .cluster polygon {
+  fill: rgb(var(--ctp-surface0)) !important;
+  stroke: rgb(var(--ctp-mauve)) !important;
+}
+body .mermaid > svg:not(#_) .cluster-label,
+body .mermaid > svg:not(#_) .cluster-label span,
+body .mermaid > svg:not(#_) .cluster-label text,
+body .mermaid > svg:not(#_) .cluster text {
+  fill: rgb(var(--ctp-text)) !important;
+  color: rgb(var(--ctp-text)) !important;
+}
+body .mermaid > svg:not(#_) rect.actor,
+body .mermaid > svg:not(#_) .actor {
+  fill: rgb(var(--ctp-surface2)) !important;
+  stroke: rgb(var(--ctp-mauve)) !important;
+}
+body .mermaid > svg:not(#_) text.actor,
+body .mermaid > svg:not(#_) text.actor > tspan {
+  fill: rgb(var(--ctp-text)) !important;
+  stroke: none !important;
+}
+body .mermaid > svg:not(#_) .messageText,
+body .mermaid > svg:not(#_) .noteText,
+body .mermaid > svg:not(#_) .loopText,
+body .mermaid > svg:not(#_) .loopText > tspan,
+body .mermaid > svg:not(#_) .labelText,
+body .mermaid > svg:not(#_) .labelText > tspan {
+  fill: rgb(var(--ctp-text)) !important;
+  stroke: none !important;
+}
+body .mermaid > svg:not(#_) .messageLine0,
+body .mermaid > svg:not(#_) .messageLine1 {
+  stroke: rgb(var(--ctp-subtext0)) !important;
+}
+body .mermaid > svg:not(#_) .note {
+  fill: rgb(var(--ctp-surface1)) !important;
+  stroke: rgb(var(--ctp-yellow)) !important;
+}
+body .mermaid > svg:not(#_) .noteText,
+body .mermaid > svg:not(#_) .noteText > tspan {
+  fill: rgb(var(--ctp-text)) !important;
+}
+body .mermaid > svg:not(#_) .loopLine {
+  stroke: rgb(var(--ctp-mauve)) !important;
+}
+body .mermaid > svg:not(#_) .labelBox {
+  fill: rgb(var(--ctp-surface2)) !important;
+  stroke: rgb(var(--ctp-mauve)) !important;
+}
+body .mermaid > svg:not(#_) .activation0,
+body .mermaid > svg:not(#_) .activation1,
+body .mermaid > svg:not(#_) .activation2 {
+  fill: rgb(var(--ctp-surface1)) !important;
+  stroke: rgb(var(--ctp-subtext0)) !important;
+}
+body .mermaid > svg:not(#_) .sequenceNumber {
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) #arrowhead path,
+body .mermaid > svg:not(#_) #sequencenumber,
+body .mermaid > svg:not(#_) #crosshead path {
+  fill: rgb(var(--ctp-subtext0)) !important;
+  stroke: rgb(var(--ctp-subtext0)) !important;
+}
+body .mermaid > svg:not(#_) #sequencenumber {
+  fill: rgb(var(--ctp-subtext0)) !important;
+}
+body .mermaid > svg:not(#_) .classTitle,
+body .mermaid > svg:not(#_) .classText {
+  fill: rgb(var(--ctp-text)) !important;
+}
+body .mermaid > svg:not(#_) g.node .divider path {
+  stroke: rgb(var(--ctp-mauve)) !important;
+}
+body .mermaid > svg:not(#_) .node .label-group .nodeLabel,
+body .mermaid > svg:not(#_) .node .members-group .nodeLabel,
+body .mermaid > svg:not(#_) .node .methods-group .nodeLabel,
+body .mermaid > svg:not(#_) .node .annotation-group .nodeLabel {
+  color: rgb(var(--ctp-text)) !important;
+}
+body .mermaid > svg:not(#_) .state-start,
+body .mermaid > svg:not(#_) circle.state-start {
+  fill: rgb(var(--ctp-subtext0)) !important;
+  stroke: rgb(var(--ctp-subtext0)) !important;
+}
+body .mermaid > svg:not(#_) .end-state-inner,
+body .mermaid > svg:not(#_) .end-state-outer,
+body .mermaid > svg:not(#_) .node.statediagram-end circle {
+  fill: rgb(var(--ctp-subtext0)) !important;
+  stroke: rgb(var(--ctp-subtext0)) !important;
+}
+body .mermaid > svg:not(#_) .statediagram-cluster rect {
+  fill: rgb(var(--ctp-surface2)) !important;
+  stroke: rgb(var(--ctp-mauve)) !important;
+}
+body .mermaid > svg:not(#_) .statediagram-note rect,
+body .mermaid > svg:not(#_) .node.statediagram-note rect {
+  fill: rgb(var(--ctp-surface1)) !important;
+  stroke: rgb(var(--ctp-yellow)) !important;
+}
+body .mermaid > svg:not(#_) .row-rect-odd path,
+body .mermaid > svg:not(#_) .row-rect-odd rect {
+  fill: rgb(var(--ctp-surface0)) !important;
+  stroke: rgb(var(--ctp-mauve)) !important;
+}
+body .mermaid > svg:not(#_) .row-rect-even path,
+body .mermaid > svg:not(#_) .row-rect-even rect {
+  fill: rgb(var(--ctp-surface2)) !important;
+  stroke: rgb(var(--ctp-mauve)) !important;
+}
+body .mermaid > svg:not(#_) .relationshipLabel,
+body .mermaid > svg:not(#_) .relationshipLabelBox {
+  fill: rgb(var(--ctp-base)) !important;
+}
+body .mermaid > svg:not(#_) .attribute-keys,
+body .mermaid > svg:not(#_) .attribute-type,
+body .mermaid > svg:not(#_) .attribute-comment {
+  color: rgb(var(--ctp-subtext0)) !important;
+  fill: rgb(var(--ctp-subtext0)) !important;
+}
+body .mermaid > svg:not(#_) .grid .tick line {
+  stroke: rgb(var(--ctp-surface1)) !important;
+}
+body .mermaid > svg:not(#_) .grid .tick text {
+  fill: rgb(var(--ctp-subtext0)) !important;
+}
+body .mermaid > svg:not(#_) .grid path,
+body .mermaid > svg:not(#_) .grid .domain {
+  stroke: transparent !important;
+}
+body .mermaid > svg:not(#_) .titleText {
+  fill: rgb(var(--ctp-text)) !important;
+}
+body .mermaid > svg:not(#_) .sectionTitle {
+  fill: rgb(var(--ctp-text)) !important;
+}
+body .mermaid > svg:not(#_) rect.section0,
+body .mermaid > svg:not(#_) rect.section2 {
+  fill: rgb(var(--ctp-surface0)) !important;
+}
+body .mermaid > svg:not(#_) rect.section1,
+body .mermaid > svg:not(#_) rect.section3 {
+  fill: rgb(var(--ctp-mantle)) !important;
+}
+body .mermaid > svg:not(#_) .task,
+body .mermaid > svg:not(#_) rect.task {
+  stroke-width: 1 !important;
+}
+body .mermaid > svg:not(#_) .task0,
+body .mermaid > svg:not(#_) .task1,
+body .mermaid > svg:not(#_) .task2,
+body .mermaid > svg:not(#_) .task3 {
+  fill: rgb(var(--ctp-surface2)) !important;
+  stroke: rgb(var(--ctp-mauve)) !important;
+}
+body .mermaid > svg:not(#_) .active0,
+body .mermaid > svg:not(#_) .active1,
+body .mermaid > svg:not(#_) .active2,
+body .mermaid > svg:not(#_) .active3 {
+  fill: rgb(var(--ctp-mauve)) !important;
+  stroke: rgb(var(--ctp-pink)) !important;
+}
+body .mermaid > svg:not(#_) .done0,
+body .mermaid > svg:not(#_) .done1,
+body .mermaid > svg:not(#_) .done2,
+body .mermaid > svg:not(#_) .done3 {
+  fill: rgb(var(--ctp-surface1)) !important;
+  stroke: rgb(var(--ctp-overlay0)) !important;
+}
+body .mermaid > svg:not(#_) .crit0,
+body .mermaid > svg:not(#_) .crit1,
+body .mermaid > svg:not(#_) .crit2,
+body .mermaid > svg:not(#_) .crit3,
+body .mermaid > svg:not(#_) .activeCrit0,
+body .mermaid > svg:not(#_) .activeCrit1,
+body .mermaid > svg:not(#_) .activeCrit2,
+body .mermaid > svg:not(#_) .activeCrit3,
+body .mermaid > svg:not(#_) .doneCrit0,
+body .mermaid > svg:not(#_) .doneCrit1,
+body .mermaid > svg:not(#_) .doneCrit2,
+body .mermaid > svg:not(#_) .doneCrit3 {
+  fill: rgb(var(--ctp-red)) !important;
+  stroke: rgb(var(--ctp-pink)) !important;
+}
+body .mermaid > svg:not(#_) .milestone {
+  fill: rgb(var(--ctp-yellow)) !important;
+}
+body .mermaid > svg:not(#_) .taskText,
+body .mermaid > svg:not(#_) .taskTextOutsideLeft,
+body .mermaid > svg:not(#_) .taskTextOutsideRight {
+  fill: rgb(var(--ctp-text)) !important;
+}
+body .mermaid > svg:not(#_) .taskText.activeText0,
+body .mermaid > svg:not(#_) .taskText.activeText1,
+body .mermaid > svg:not(#_) .taskText.activeText2,
+body .mermaid > svg:not(#_) .taskText.activeText3,
+body .mermaid > svg:not(#_) .taskText.critText0,
+body .mermaid > svg:not(#_) .taskText.critText1,
+body .mermaid > svg:not(#_) .taskText.critText2,
+body .mermaid > svg:not(#_) .taskText.critText3,
+body .mermaid > svg:not(#_) .taskText.activeCritText0,
+body .mermaid > svg:not(#_) .taskText.activeCritText1,
+body .mermaid > svg:not(#_) .taskText.activeCritText2,
+body .mermaid > svg:not(#_) .taskText.activeCritText3 {
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .taskText.doneText0,
+body .mermaid > svg:not(#_) .taskText.doneText1,
+body .mermaid > svg:not(#_) .taskText.doneText2,
+body .mermaid > svg:not(#_) .taskText.doneText3 {
+  fill: rgb(var(--ctp-subtext0)) !important;
+}
+body .mermaid > svg:not(#_) .taskTextOutsideLeft,
+body .mermaid > svg:not(#_) .taskTextOutsideRight,
+body .mermaid > svg:not(#_) .taskTextOutside0,
+body .mermaid > svg:not(#_) .taskTextOutside1,
+body .mermaid > svg:not(#_) .taskTextOutside2,
+body .mermaid > svg:not(#_) .taskTextOutside3 {
+  fill: rgb(var(--ctp-text)) !important;
+}
+body .mermaid > svg:not(#_) .today {
+  stroke: rgb(var(--ctp-red)) !important;
+}
+body .mermaid > svg:not(#_) .pieOuterCircle {
+  stroke: rgb(var(--ctp-mauve)) !important;
+  fill: none !important;
+}
+body .mermaid > svg:not(#_) .pieCircle {
+  stroke: rgb(var(--ctp-base)) !important;
+  opacity: 1 !important;
+}
+body .mermaid > svg:not(#_) path.pieCircle:nth-of-type(8n + 1) {
+  fill: rgb(var(--ctp-mauve)) !important;
+}
+body .mermaid > svg:not(#_) .legend:nth-of-type(8n + 1) rect {
+  fill: rgb(var(--ctp-mauve)) !important;
+  stroke: rgb(var(--ctp-mauve)) !important;
+}
+body .mermaid > svg:not(#_) path.pieCircle:nth-of-type(8n + 2) {
+  fill: rgb(var(--ctp-pink)) !important;
+}
+body .mermaid > svg:not(#_) .legend:nth-of-type(8n + 2) rect {
+  fill: rgb(var(--ctp-pink)) !important;
+  stroke: rgb(var(--ctp-pink)) !important;
+}
+body .mermaid > svg:not(#_) path.pieCircle:nth-of-type(8n + 3) {
+  fill: rgb(var(--ctp-sky)) !important;
+}
+body .mermaid > svg:not(#_) .legend:nth-of-type(8n + 3) rect {
+  fill: rgb(var(--ctp-sky)) !important;
+  stroke: rgb(var(--ctp-sky)) !important;
+}
+body .mermaid > svg:not(#_) path.pieCircle:nth-of-type(8n + 4) {
+  fill: rgb(var(--ctp-green)) !important;
+}
+body .mermaid > svg:not(#_) .legend:nth-of-type(8n + 4) rect {
+  fill: rgb(var(--ctp-green)) !important;
+  stroke: rgb(var(--ctp-green)) !important;
+}
+body .mermaid > svg:not(#_) path.pieCircle:nth-of-type(8n + 5) {
+  fill: rgb(var(--ctp-peach)) !important;
+}
+body .mermaid > svg:not(#_) .legend:nth-of-type(8n + 5) rect {
+  fill: rgb(var(--ctp-peach)) !important;
+  stroke: rgb(var(--ctp-peach)) !important;
+}
+body .mermaid > svg:not(#_) path.pieCircle:nth-of-type(8n + 6) {
+  fill: rgb(var(--ctp-yellow)) !important;
+}
+body .mermaid > svg:not(#_) .legend:nth-of-type(8n + 6) rect {
+  fill: rgb(var(--ctp-yellow)) !important;
+  stroke: rgb(var(--ctp-yellow)) !important;
+}
+body .mermaid > svg:not(#_) path.pieCircle:nth-of-type(8n + 7) {
+  fill: rgb(var(--ctp-red)) !important;
+}
+body .mermaid > svg:not(#_) .legend:nth-of-type(8n + 7) rect {
+  fill: rgb(var(--ctp-red)) !important;
+  stroke: rgb(var(--ctp-red)) !important;
+}
+body .mermaid > svg:not(#_) path.pieCircle:nth-of-type(8n + 8) {
+  fill: rgb(var(--ctp-overlay0)) !important;
+}
+body .mermaid > svg:not(#_) .legend:nth-of-type(8n + 8) rect {
+  fill: rgb(var(--ctp-overlay0)) !important;
+  stroke: rgb(var(--ctp-overlay0)) !important;
+}
+body .mermaid > svg:not(#_) .pieTitleText,
+body .mermaid > svg:not(#_) .legend text {
+  fill: rgb(var(--ctp-text)) !important;
+}
+body .mermaid > svg:not(#_) .slice {
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .pieCircle ~ .slice,
+body .mermaid > svg:not(#_) text.slice {
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .mindmap-node.section-root circle,
+body .mermaid > svg:not(#_) .mindmap-node.section-root rect,
+body .mermaid > svg:not(#_) .mindmap-node.section-root path {
+  fill: rgb(var(--ctp-mauve)) !important;
+  stroke: rgb(var(--ctp-mauve)) !important;
+}
+body .mermaid > svg:not(#_) .mindmap-node.section-root .nodeLabel,
+body .mermaid > svg:not(#_) .mindmap-node.section-root text {
+  color: rgb(var(--ctp-crust)) !important;
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .mindmap-node .node-bkg {
+  stroke: none !important;
+}
+body .mermaid > svg:not(#_) .edge {
+  fill: none !important;
+}
+body .mermaid > svg:not(#_) .section-0 .node-bkg,
+body .mermaid > svg:not(#_) .section-0 rect,
+body .mermaid > svg:not(#_) .section-0 path.node-bkg {
+  fill: rgb(var(--ctp-mauve)) !important;
+}
+body .mermaid > svg:not(#_) .section-0 .node-line-0,
+body .mermaid > svg:not(#_) .section-0 line {
+  stroke: rgb(var(--ctp-mauve)) !important;
+}
+body .mermaid > svg:not(#_) .section-edge-0 {
+  stroke: rgb(var(--ctp-mauve)) !important;
+}
+body .mermaid > svg:not(#_) .section-0 .nodeLabel,
+body .mermaid > svg:not(#_) .section-0 text,
+body .mermaid > svg:not(#_) .section-0 p,
+body .mermaid > svg:not(#_) .section-0 span {
+  color: rgb(var(--ctp-crust)) !important;
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .section-1 .node-bkg,
+body .mermaid > svg:not(#_) .section-1 rect,
+body .mermaid > svg:not(#_) .section-1 path.node-bkg {
+  fill: rgb(var(--ctp-pink)) !important;
+}
+body .mermaid > svg:not(#_) .section-1 .node-line-1,
+body .mermaid > svg:not(#_) .section-1 line {
+  stroke: rgb(var(--ctp-pink)) !important;
+}
+body .mermaid > svg:not(#_) .section-edge-1 {
+  stroke: rgb(var(--ctp-pink)) !important;
+}
+body .mermaid > svg:not(#_) .section-1 .nodeLabel,
+body .mermaid > svg:not(#_) .section-1 text,
+body .mermaid > svg:not(#_) .section-1 p,
+body .mermaid > svg:not(#_) .section-1 span {
+  color: rgb(var(--ctp-crust)) !important;
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .section-2 .node-bkg,
+body .mermaid > svg:not(#_) .section-2 rect,
+body .mermaid > svg:not(#_) .section-2 path.node-bkg {
+  fill: rgb(var(--ctp-sky)) !important;
+}
+body .mermaid > svg:not(#_) .section-2 .node-line-2,
+body .mermaid > svg:not(#_) .section-2 line {
+  stroke: rgb(var(--ctp-sky)) !important;
+}
+body .mermaid > svg:not(#_) .section-edge-2 {
+  stroke: rgb(var(--ctp-sky)) !important;
+}
+body .mermaid > svg:not(#_) .section-2 .nodeLabel,
+body .mermaid > svg:not(#_) .section-2 text,
+body .mermaid > svg:not(#_) .section-2 p,
+body .mermaid > svg:not(#_) .section-2 span {
+  color: rgb(var(--ctp-crust)) !important;
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .section-3 .node-bkg,
+body .mermaid > svg:not(#_) .section-3 rect,
+body .mermaid > svg:not(#_) .section-3 path.node-bkg {
+  fill: rgb(var(--ctp-green)) !important;
+}
+body .mermaid > svg:not(#_) .section-3 .node-line-3,
+body .mermaid > svg:not(#_) .section-3 line {
+  stroke: rgb(var(--ctp-green)) !important;
+}
+body .mermaid > svg:not(#_) .section-edge-3 {
+  stroke: rgb(var(--ctp-green)) !important;
+}
+body .mermaid > svg:not(#_) .section-3 .nodeLabel,
+body .mermaid > svg:not(#_) .section-3 text,
+body .mermaid > svg:not(#_) .section-3 p,
+body .mermaid > svg:not(#_) .section-3 span {
+  color: rgb(var(--ctp-crust)) !important;
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .section-4 .node-bkg,
+body .mermaid > svg:not(#_) .section-4 rect,
+body .mermaid > svg:not(#_) .section-4 path.node-bkg {
+  fill: rgb(var(--ctp-peach)) !important;
+}
+body .mermaid > svg:not(#_) .section-4 .node-line-4,
+body .mermaid > svg:not(#_) .section-4 line {
+  stroke: rgb(var(--ctp-peach)) !important;
+}
+body .mermaid > svg:not(#_) .section-edge-4 {
+  stroke: rgb(var(--ctp-peach)) !important;
+}
+body .mermaid > svg:not(#_) .section-4 .nodeLabel,
+body .mermaid > svg:not(#_) .section-4 text,
+body .mermaid > svg:not(#_) .section-4 p,
+body .mermaid > svg:not(#_) .section-4 span {
+  color: rgb(var(--ctp-crust)) !important;
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .section-5 .node-bkg,
+body .mermaid > svg:not(#_) .section-5 rect,
+body .mermaid > svg:not(#_) .section-5 path.node-bkg {
+  fill: rgb(var(--ctp-yellow)) !important;
+}
+body .mermaid > svg:not(#_) .section-5 .node-line-5,
+body .mermaid > svg:not(#_) .section-5 line {
+  stroke: rgb(var(--ctp-yellow)) !important;
+}
+body .mermaid > svg:not(#_) .section-edge-5 {
+  stroke: rgb(var(--ctp-yellow)) !important;
+}
+body .mermaid > svg:not(#_) .section-5 .nodeLabel,
+body .mermaid > svg:not(#_) .section-5 text,
+body .mermaid > svg:not(#_) .section-5 p,
+body .mermaid > svg:not(#_) .section-5 span {
+  color: rgb(var(--ctp-crust)) !important;
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .section-6 .node-bkg,
+body .mermaid > svg:not(#_) .section-6 rect,
+body .mermaid > svg:not(#_) .section-6 path.node-bkg {
+  fill: rgb(var(--ctp-red)) !important;
+}
+body .mermaid > svg:not(#_) .section-6 .node-line-6,
+body .mermaid > svg:not(#_) .section-6 line {
+  stroke: rgb(var(--ctp-red)) !important;
+}
+body .mermaid > svg:not(#_) .section-edge-6 {
+  stroke: rgb(var(--ctp-red)) !important;
+}
+body .mermaid > svg:not(#_) .section-6 .nodeLabel,
+body .mermaid > svg:not(#_) .section-6 text,
+body .mermaid > svg:not(#_) .section-6 p,
+body .mermaid > svg:not(#_) .section-6 span {
+  color: rgb(var(--ctp-crust)) !important;
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .section-7 .node-bkg,
+body .mermaid > svg:not(#_) .section-7 rect,
+body .mermaid > svg:not(#_) .section-7 path.node-bkg {
+  fill: rgb(var(--ctp-overlay0)) !important;
+}
+body .mermaid > svg:not(#_) .section-7 .node-line-7,
+body .mermaid > svg:not(#_) .section-7 line {
+  stroke: rgb(var(--ctp-overlay0)) !important;
+}
+body .mermaid > svg:not(#_) .section-edge-7 {
+  stroke: rgb(var(--ctp-overlay0)) !important;
+}
+body .mermaid > svg:not(#_) .section-7 .nodeLabel,
+body .mermaid > svg:not(#_) .section-7 text,
+body .mermaid > svg:not(#_) .section-7 p,
+body .mermaid > svg:not(#_) .section-7 span {
+  color: rgb(var(--ctp-crust)) !important;
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .branch0,
+body .mermaid > svg:not(#_) .arrow0 {
+  stroke: rgb(var(--ctp-mauve)) !important;
+}
+body .mermaid > svg:not(#_) .commit0,
+body .mermaid > svg:not(#_) .commit-merge.commit0 {
+  fill: rgb(var(--ctp-mauve)) !important;
+  stroke: rgb(var(--ctp-mauve)) !important;
+}
+body .mermaid > svg:not(#_) .label0,
+body .mermaid > svg:not(#_) rect.branchLabelBkg.label0 {
+  fill: rgb(var(--ctp-mauve)) !important;
+  stroke: rgb(var(--ctp-mauve)) !important;
+}
+body .mermaid > svg:not(#_) .branch-label0 text,
+body .mermaid > svg:not(#_) .branch-label0 tspan {
+  fill: rgb(var(--ctp-crust)) !important;
+  stroke: none !important;
+}
+body .mermaid > svg:not(#_) .branch1,
+body .mermaid > svg:not(#_) .arrow1 {
+  stroke: rgb(var(--ctp-pink)) !important;
+}
+body .mermaid > svg:not(#_) .commit1,
+body .mermaid > svg:not(#_) .commit-merge.commit1 {
+  fill: rgb(var(--ctp-pink)) !important;
+  stroke: rgb(var(--ctp-pink)) !important;
+}
+body .mermaid > svg:not(#_) .label1,
+body .mermaid > svg:not(#_) rect.branchLabelBkg.label1 {
+  fill: rgb(var(--ctp-pink)) !important;
+  stroke: rgb(var(--ctp-pink)) !important;
+}
+body .mermaid > svg:not(#_) .branch-label1 text,
+body .mermaid > svg:not(#_) .branch-label1 tspan {
+  fill: rgb(var(--ctp-crust)) !important;
+  stroke: none !important;
+}
+body .mermaid > svg:not(#_) .branch2,
+body .mermaid > svg:not(#_) .arrow2 {
+  stroke: rgb(var(--ctp-sky)) !important;
+}
+body .mermaid > svg:not(#_) .commit2,
+body .mermaid > svg:not(#_) .commit-merge.commit2 {
+  fill: rgb(var(--ctp-sky)) !important;
+  stroke: rgb(var(--ctp-sky)) !important;
+}
+body .mermaid > svg:not(#_) .label2,
+body .mermaid > svg:not(#_) rect.branchLabelBkg.label2 {
+  fill: rgb(var(--ctp-sky)) !important;
+  stroke: rgb(var(--ctp-sky)) !important;
+}
+body .mermaid > svg:not(#_) .branch-label2 text,
+body .mermaid > svg:not(#_) .branch-label2 tspan {
+  fill: rgb(var(--ctp-crust)) !important;
+  stroke: none !important;
+}
+body .mermaid > svg:not(#_) .branch3,
+body .mermaid > svg:not(#_) .arrow3 {
+  stroke: rgb(var(--ctp-green)) !important;
+}
+body .mermaid > svg:not(#_) .commit3,
+body .mermaid > svg:not(#_) .commit-merge.commit3 {
+  fill: rgb(var(--ctp-green)) !important;
+  stroke: rgb(var(--ctp-green)) !important;
+}
+body .mermaid > svg:not(#_) .label3,
+body .mermaid > svg:not(#_) rect.branchLabelBkg.label3 {
+  fill: rgb(var(--ctp-green)) !important;
+  stroke: rgb(var(--ctp-green)) !important;
+}
+body .mermaid > svg:not(#_) .branch-label3 text,
+body .mermaid > svg:not(#_) .branch-label3 tspan {
+  fill: rgb(var(--ctp-crust)) !important;
+  stroke: none !important;
+}
+body .mermaid > svg:not(#_) .branch4,
+body .mermaid > svg:not(#_) .arrow4 {
+  stroke: rgb(var(--ctp-peach)) !important;
+}
+body .mermaid > svg:not(#_) .commit4,
+body .mermaid > svg:not(#_) .commit-merge.commit4 {
+  fill: rgb(var(--ctp-peach)) !important;
+  stroke: rgb(var(--ctp-peach)) !important;
+}
+body .mermaid > svg:not(#_) .label4,
+body .mermaid > svg:not(#_) rect.branchLabelBkg.label4 {
+  fill: rgb(var(--ctp-peach)) !important;
+  stroke: rgb(var(--ctp-peach)) !important;
+}
+body .mermaid > svg:not(#_) .branch-label4 text,
+body .mermaid > svg:not(#_) .branch-label4 tspan {
+  fill: rgb(var(--ctp-crust)) !important;
+  stroke: none !important;
+}
+body .mermaid > svg:not(#_) .branch5,
+body .mermaid > svg:not(#_) .arrow5 {
+  stroke: rgb(var(--ctp-yellow)) !important;
+}
+body .mermaid > svg:not(#_) .commit5,
+body .mermaid > svg:not(#_) .commit-merge.commit5 {
+  fill: rgb(var(--ctp-yellow)) !important;
+  stroke: rgb(var(--ctp-yellow)) !important;
+}
+body .mermaid > svg:not(#_) .label5,
+body .mermaid > svg:not(#_) rect.branchLabelBkg.label5 {
+  fill: rgb(var(--ctp-yellow)) !important;
+  stroke: rgb(var(--ctp-yellow)) !important;
+}
+body .mermaid > svg:not(#_) .branch-label5 text,
+body .mermaid > svg:not(#_) .branch-label5 tspan {
+  fill: rgb(var(--ctp-crust)) !important;
+  stroke: none !important;
+}
+body .mermaid > svg:not(#_) .branch6,
+body .mermaid > svg:not(#_) .arrow6 {
+  stroke: rgb(var(--ctp-red)) !important;
+}
+body .mermaid > svg:not(#_) .commit6,
+body .mermaid > svg:not(#_) .commit-merge.commit6 {
+  fill: rgb(var(--ctp-red)) !important;
+  stroke: rgb(var(--ctp-red)) !important;
+}
+body .mermaid > svg:not(#_) .label6,
+body .mermaid > svg:not(#_) rect.branchLabelBkg.label6 {
+  fill: rgb(var(--ctp-red)) !important;
+  stroke: rgb(var(--ctp-red)) !important;
+}
+body .mermaid > svg:not(#_) .branch-label6 text,
+body .mermaid > svg:not(#_) .branch-label6 tspan {
+  fill: rgb(var(--ctp-crust)) !important;
+  stroke: none !important;
+}
+body .mermaid > svg:not(#_) .branch7,
+body .mermaid > svg:not(#_) .arrow7 {
+  stroke: rgb(var(--ctp-overlay0)) !important;
+}
+body .mermaid > svg:not(#_) .commit7,
+body .mermaid > svg:not(#_) .commit-merge.commit7 {
+  fill: rgb(var(--ctp-overlay0)) !important;
+  stroke: rgb(var(--ctp-overlay0)) !important;
+}
+body .mermaid > svg:not(#_) .label7,
+body .mermaid > svg:not(#_) rect.branchLabelBkg.label7 {
+  fill: rgb(var(--ctp-overlay0)) !important;
+  stroke: rgb(var(--ctp-overlay0)) !important;
+}
+body .mermaid > svg:not(#_) .branch-label7 text,
+body .mermaid > svg:not(#_) .branch-label7 tspan {
+  fill: rgb(var(--ctp-crust)) !important;
+  stroke: none !important;
+}
+body .mermaid > svg:not(#_) .commit-label {
+  fill: rgb(var(--ctp-text)) !important;
+}
+body .mermaid > svg:not(#_) .commit-label-bkg {
+  fill: rgb(var(--ctp-base)) !important;
+  opacity: 0.85;
+}
+body .mermaid > svg:not(#_) .commit-merge {
+  fill: rgb(var(--ctp-base)) !important;
+}
+body .mermaid > svg:not(#_) .branch {
+  stroke-dasharray: 2;
+}
+body .mermaid > svg:not(#_) .journey-section,
+body .mermaid > svg:not(#_) rect.journey-section {
+  stroke: none !important;
+}
+body .mermaid > svg:not(#_) .section-type-0 {
+  fill: rgb(var(--ctp-mauve)) !important;
+}
+body .mermaid > svg:not(#_) .actor-0 {
+  fill: rgb(var(--ctp-mauve)) !important;
+  stroke: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) text.journey-section.section-type-0,
+body .mermaid > svg:not(#_) div.journey-section.section-type-0 {
+  color: rgb(var(--ctp-crust)) !important;
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .section-type-1 {
+  fill: rgb(var(--ctp-pink)) !important;
+}
+body .mermaid > svg:not(#_) .actor-1 {
+  fill: rgb(var(--ctp-pink)) !important;
+  stroke: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) text.journey-section.section-type-1,
+body .mermaid > svg:not(#_) div.journey-section.section-type-1 {
+  color: rgb(var(--ctp-crust)) !important;
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .section-type-2 {
+  fill: rgb(var(--ctp-sky)) !important;
+}
+body .mermaid > svg:not(#_) .actor-2 {
+  fill: rgb(var(--ctp-sky)) !important;
+  stroke: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) text.journey-section.section-type-2,
+body .mermaid > svg:not(#_) div.journey-section.section-type-2 {
+  color: rgb(var(--ctp-crust)) !important;
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .section-type-3 {
+  fill: rgb(var(--ctp-green)) !important;
+}
+body .mermaid > svg:not(#_) .actor-3 {
+  fill: rgb(var(--ctp-green)) !important;
+  stroke: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) text.journey-section.section-type-3,
+body .mermaid > svg:not(#_) div.journey-section.section-type-3 {
+  color: rgb(var(--ctp-crust)) !important;
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .section-type-4 {
+  fill: rgb(var(--ctp-peach)) !important;
+}
+body .mermaid > svg:not(#_) .actor-4 {
+  fill: rgb(var(--ctp-peach)) !important;
+  stroke: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) text.journey-section.section-type-4,
+body .mermaid > svg:not(#_) div.journey-section.section-type-4 {
+  color: rgb(var(--ctp-crust)) !important;
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .section-type-5 {
+  fill: rgb(var(--ctp-yellow)) !important;
+}
+body .mermaid > svg:not(#_) .actor-5 {
+  fill: rgb(var(--ctp-yellow)) !important;
+  stroke: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) text.journey-section.section-type-5,
+body .mermaid > svg:not(#_) div.journey-section.section-type-5 {
+  color: rgb(var(--ctp-crust)) !important;
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .section-type-6 {
+  fill: rgb(var(--ctp-red)) !important;
+}
+body .mermaid > svg:not(#_) .actor-6 {
+  fill: rgb(var(--ctp-red)) !important;
+  stroke: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) text.journey-section.section-type-6,
+body .mermaid > svg:not(#_) div.journey-section.section-type-6 {
+  color: rgb(var(--ctp-crust)) !important;
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .section-type-7 {
+  fill: rgb(var(--ctp-overlay0)) !important;
+}
+body .mermaid > svg:not(#_) .actor-7 {
+  fill: rgb(var(--ctp-overlay0)) !important;
+  stroke: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) text.journey-section.section-type-7,
+body .mermaid > svg:not(#_) div.journey-section.section-type-7 {
+  color: rgb(var(--ctp-crust)) !important;
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .task-type-0,
+body .mermaid > svg:not(#_) .task-type-1,
+body .mermaid > svg:not(#_) .task-type-2,
+body .mermaid > svg:not(#_) .task-type-3,
+body .mermaid > svg:not(#_) .task-type-4,
+body .mermaid > svg:not(#_) .task-type-5,
+body .mermaid > svg:not(#_) .task-type-6,
+body .mermaid > svg:not(#_) .task-type-7 {
+  fill: rgb(var(--ctp-surface2)) !important;
+  stroke: rgb(var(--ctp-mauve)) !important;
+}
+body .mermaid > svg:not(#_) .task-line {
+  stroke: rgb(var(--ctp-subtext0)) !important;
+}
+body .mermaid > svg:not(#_) .face {
+  fill: rgb(var(--ctp-yellow)) !important;
+  stroke: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .mouth {
+  stroke: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .legend {
+  fill: rgb(var(--ctp-text)) !important;
+}
+body .mermaid > svg:not(#_) .task,
+body .mermaid > svg:not(#_) div.task,
+body .mermaid > svg:not(#_) text.task {
+  color: rgb(var(--ctp-text)) !important;
+}
+body .mermaid > svg:not(#_) .timeline-node .node-bkg {
+  fill: rgb(var(--ctp-surface2)) !important;
+  stroke: none !important;
+}
+body .mermaid > svg:not(#_) .timeline-node.section-0 .node-bkg {
+  fill: rgb(var(--ctp-mauve)) !important;
+}
+body .mermaid > svg:not(#_) .timeline-node.section-0 .node-line-0 {
+  stroke: rgb(var(--ctp-mauve)) !important;
+}
+body .mermaid > svg:not(#_) .timeline-node.section-0 text,
+body .mermaid > svg:not(#_) .timeline-node.section-0 tspan {
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .timeline-node.section-1 .node-bkg {
+  fill: rgb(var(--ctp-pink)) !important;
+}
+body .mermaid > svg:not(#_) .timeline-node.section-1 .node-line-1 {
+  stroke: rgb(var(--ctp-pink)) !important;
+}
+body .mermaid > svg:not(#_) .timeline-node.section-1 text,
+body .mermaid > svg:not(#_) .timeline-node.section-1 tspan {
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .timeline-node.section-2 .node-bkg {
+  fill: rgb(var(--ctp-sky)) !important;
+}
+body .mermaid > svg:not(#_) .timeline-node.section-2 .node-line-2 {
+  stroke: rgb(var(--ctp-sky)) !important;
+}
+body .mermaid > svg:not(#_) .timeline-node.section-2 text,
+body .mermaid > svg:not(#_) .timeline-node.section-2 tspan {
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .timeline-node.section-3 .node-bkg {
+  fill: rgb(var(--ctp-green)) !important;
+}
+body .mermaid > svg:not(#_) .timeline-node.section-3 .node-line-3 {
+  stroke: rgb(var(--ctp-green)) !important;
+}
+body .mermaid > svg:not(#_) .timeline-node.section-3 text,
+body .mermaid > svg:not(#_) .timeline-node.section-3 tspan {
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .timeline-node.section-4 .node-bkg {
+  fill: rgb(var(--ctp-peach)) !important;
+}
+body .mermaid > svg:not(#_) .timeline-node.section-4 .node-line-4 {
+  stroke: rgb(var(--ctp-peach)) !important;
+}
+body .mermaid > svg:not(#_) .timeline-node.section-4 text,
+body .mermaid > svg:not(#_) .timeline-node.section-4 tspan {
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .timeline-node.section-5 .node-bkg {
+  fill: rgb(var(--ctp-yellow)) !important;
+}
+body .mermaid > svg:not(#_) .timeline-node.section-5 .node-line-5 {
+  stroke: rgb(var(--ctp-yellow)) !important;
+}
+body .mermaid > svg:not(#_) .timeline-node.section-5 text,
+body .mermaid > svg:not(#_) .timeline-node.section-5 tspan {
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .timeline-node.section-6 .node-bkg {
+  fill: rgb(var(--ctp-red)) !important;
+}
+body .mermaid > svg:not(#_) .timeline-node.section-6 .node-line-6 {
+  stroke: rgb(var(--ctp-red)) !important;
+}
+body .mermaid > svg:not(#_) .timeline-node.section-6 text,
+body .mermaid > svg:not(#_) .timeline-node.section-6 tspan {
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .timeline-node.section-7 .node-bkg {
+  fill: rgb(var(--ctp-overlay0)) !important;
+}
+body .mermaid > svg:not(#_) .timeline-node.section-7 .node-line-7 {
+  stroke: rgb(var(--ctp-overlay0)) !important;
+}
+body .mermaid > svg:not(#_) .timeline-node.section-7 text,
+body .mermaid > svg:not(#_) .timeline-node.section-7 tspan {
+  fill: rgb(var(--ctp-crust)) !important;
+}
+body .mermaid > svg:not(#_) .eventWrapper {
+  filter: none !important;
+}
+body .mermaid > svg:not(#_) .eventWrapper line,
+body .mermaid > svg:not(#_) .lineWrapper line {
+  stroke: rgb(var(--ctp-subtext0)) !important;
+}
+body .mermaid > svg:not(#_) .taskWrapper .node-line--1,
+body .mermaid > svg:not(#_) .node-line--1 {
+  stroke: rgb(var(--ctp-subtext0)) !important;
+}
+
 /*-----------------------------------
 Rainbow tags is a snippet by @raisabelatrix
 Link: https://gist.github.com/raisabelatrix/eb383f7e19b59f951430c2f3c6ed80b0
