@@ -10,7 +10,7 @@ body.is-mobile .kanban-plugin__board>div {
 }
 
 /* Fix bottom padding of kanban board when status bar is visible */
-body:not(.is-mobile):not(.anp-hide-status-bar) .kanban-plugin__board>div {
+body:not(.is-mobile) .kanban-plugin__board>div {
     padding-bottom: 2.5rem;
 }
 
@@ -79,10 +79,5 @@ body:not(.is-mobile):not(.anp-hide-status-bar) .kanban-plugin__board>div {
 
 .kanban-plugin__item .callout-fold,
 .kanban-plugin__item .callout-icon {
-    display: none;
-}
-
-/* Kanban conditional settings */
-.setting-item[data-id="anp-kanban-hide-card-menus"]:not(:has(.is-enabled))+[data-id="anp-kanban-hide-archive-btn"] {
     display: none;
 }

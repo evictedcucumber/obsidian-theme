@@ -1,7 +1,7 @@
 /*-Button for metadata-*/
-body.anuppuccin-accent-toggle {
+body {
 
-    &.anp-button-metadata-toggle,
+    &,
     .markdown-rendered.metadata-button {
         .metadata-container .metadata-properties-heading {
             background-color: rgba(var(--ctp-accent), 0.8);
@@ -17,25 +17,7 @@ body.anuppuccin-accent-toggle {
     }
 }
 
-body:not(.anuppuccin-accent-toggle) {
-
-    &.anp-button-metadata-toggle,
-    .markdown-rendered.metadata-button {
-        .metadata-container .metadata-properties-heading {
-            background-color: hsla(var(--color-accent-hsl), 0.8);
-
-            &:hover {
-                background-color: hsla(var(--color-accent-hsl), 0.7);
-            }
-
-            &:active {
-                background-color: hsla(var(--color-accent-hsl), 0.6);
-            }
-        }
-    }
-}
-
-.anp-button-metadata-toggle,
+body,
 .markdown-rendered.metadata-button {
     .metadata-container {
         padding: 0;

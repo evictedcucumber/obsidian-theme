@@ -1,5 +1,5 @@
 /* FILE PREVIEW MARGINS */
-.anp-toggle-preview .markdown-preview-section {
+body .markdown-preview-section {
     width: var(--anp-preview-width-pct);
     margin: 0 auto;
 }
@@ -28,13 +28,13 @@
 
 /* FONT WEIGHTS */
 .markdown-preview-view {
-    font-weight: var(--anp-font-preview-wt, normal);
+    font-weight: normal;
 }
 
 .markdown-source-view {
-    font-weight: var(--anp-font-editor-wt, normal);
+    font-weight: normal;
 }
 
 .is-live-preview {
-    font-weight: var(--anp-font-live-preview-wt, normal);
+    font-weight: normal;
 }
