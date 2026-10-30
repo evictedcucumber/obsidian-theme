@@ -1,0 +1,675 @@
+@use "sass:list";
+
+/*---------------------------------------------------------------
+* DIAGRAMS (Dracula)
+*
+* Pele (Obsidian's upcoming diagram renderer) draws inline
+* <svg class="pele"> and reads its colours from --pele-* custom
+* properties, so a single palette mapping covers every diagram type.
+*
+* The variables are set on body and again on the svg itself: the
+* second rule beats any container rule Obsidian sets for its own
+* --mermaid-* variables (1.15 names unknown at time of writing;
+* map them here once its app.css is available).
+*---------------------------------------------------------------*/
+body,
+body svg.pele {
+    --pele-bg: var(--background-primary);
+    --pele-fg: rgb(var(--ctp-text));
+    --pele-muted: rgb(var(--ctp-subtext0));
+    --pele-line: rgb(var(--ctp-subtext0));
+    --pele-surface: rgb(var(--ctp-surface2));
+    --pele-surface-alt: rgb(var(--ctp-surface0));
+    --pele-border: rgb(var(--ctp-mauve));
+    --pele-accent: rgb(var(--ctp-mauve));
+    --pele-critical: rgb(var(--ctp-red));
+    --pele-error: rgb(var(--ctp-red));
+    --pele-fg-on-light: rgb(var(--ctp-crust));
+    --pele-fg-on-dark: rgb(var(--ctp-text));
+
+    --pele-series-1: rgb(var(--ctp-mauve));
+    --pele-series-2: rgb(var(--ctp-pink));
+    --pele-series-3: rgb(var(--ctp-sky));
+    --pele-series-4: rgb(var(--ctp-green));
+    --pele-series-5: rgb(var(--ctp-peach));
+    --pele-series-6: rgb(var(--ctp-yellow));
+    --pele-series-7: rgb(var(--ctp-red));
+    --pele-series-8: rgb(var(--ctp-overlay0));
+
+    --pele-radius: 6px;
+    --pele-font: var(--font-text);
+    --pele-font-mono: var(--font-monospace);
+    --pele-title-weight: 600;
+    --pele-heading-weight: 600;
+    --pele-bold-weight: 600;
+}
+
+/*---------------------------------------------------------------
+* MERMAID (Obsidian 1.14, Mermaid 11)
+*
+* Obsidian renders Mermaid with the light "default" theme and, in
+* dark mode, inverts the whole svg with a CSS filter. The filter is
+* switched off here and the same Dracula mapping as the Pele
+* variables above is applied directly. Mermaid injects a <style>
+* scoped to #mermaid-<id> into every svg, so !important is needed
+* to override it.
+*
+*   node fill / border    surface2 / mauve
+*   subgraph / box fill   surface0
+*   lines, arrowheads     subtext0
+*   text                  text (crust on bright fills)
+*   series                mauve, pink, sky, green, peach, yellow,
+*                         red, overlay0
+*---------------------------------------------------------------*/
+$-text: rgb(var(--ctp-text));
+$-crust: rgb(var(--ctp-crust));
+$-node: rgb(var(--ctp-surface2));
+$-alt: rgb(var(--ctp-surface0));
+$-border: rgb(var(--ctp-mauve));
+$-line: rgb(var(--ctp-subtext0));
+$-muted: rgb(var(--ctp-subtext0));
+$-series: (
+    rgb(var(--ctp-mauve)),
+    rgb(var(--ctp-pink)),
+    rgb(var(--ctp-sky)),
+    rgb(var(--ctp-green)),
+    rgb(var(--ctp-peach)),
+    rgb(var(--ctp-yellow)),
+    rgb(var(--ctp-red)),
+    rgb(var(--ctp-overlay0))
+);
+
+body.theme-dark .mermaid > svg,
+body.theme-light .mermaid > svg {
+    filter: none !important;
+}
+
+// :not(#_) adds ID-level specificity so these beat Mermaid's own
+// "#mermaid-id .x { fill: ... !important }" rules
+body .mermaid > svg:not(#_) {
+    // Fallback text colour for anything not targeted below
+    color: $-text !important;
+
+    text,
+    tspan,
+    .label,
+    .label text,
+    .nodeLabel,
+    .edgeLabel,
+    .edgeLabel p,
+    .label p,
+    span,
+    p {
+        fill: $-text !important;
+        color: $-text !important;
+    }
+
+    // ---- shared: nodes, lines, markers, edge labels --------------
+    .node rect,
+    .node circle,
+    .node ellipse,
+    .node polygon,
+    .node path:not(.node-line),
+    .basic.label-container,
+    .label-container {
+        fill: $-node !important;
+        stroke: $-border !important;
+    }
+
+    .node .label-container.outer-path,
+    .node path.label-container {
+        fill: $-node !important;
+    }
+
+    .edgePath path,
+    path.flowchart-link,
+    path.relation,
+    path.relationshipLine,
+    path.transition,
+    .edge-thickness-normal,
+    .flowchart-link,
+    .messageLine0,
+    .messageLine1,
+    .task-line,
+    .actor-line,
+    .loopLine,
+    .cluster-edge,
+    .divider {
+        stroke: $-line !important;
+    }
+
+    .edgePath path.path,
+    path.relation,
+    path.relationshipLine,
+    path.transition,
+    path.flowchart-link {
+        fill: none !important;
+    }
+
+    marker,
+    marker path,
+    marker circle,
+    .arrowMarkerPath,
+    .arrowheadPath,
+    .marker,
+    .marker.cross {
+        fill: $-line !important;
+        stroke: $-line !important;
+    }
+
+    marker.er path,
+    marker.er circle {
+        fill: rgb(var(--ctp-base)) !important;
+    }
+
+    .edgeLabel,
+    .edgeLabel p,
+    .labelBkg,
+    .edgeLabel .label rect,
+    .edgeLabel rect {
+        background-color: rgb(var(--ctp-base)) !important;
+        fill: rgb(var(--ctp-base)) !important;
+    }
+
+    .edgeLabel .label text,
+    .edgeLabel span,
+    .edgeLabel p {
+        fill: $-text !important;
+        color: $-text !important;
+        background-color: transparent !important;
+    }
+
+    .cluster rect,
+    .cluster polygon {
+        fill: $-alt !important;
+        stroke: $-border !important;
+    }
+
+    .cluster-label,
+    .cluster-label span,
+    .cluster-label text,
+    .cluster text {
+        fill: $-text !important;
+        color: $-text !important;
+    }
+
+    // ---- sequence ------------------------------------------------
+    rect.actor,
+    .actor {
+        fill: $-node !important;
+        stroke: $-border !important;
+    }
+
+    text.actor,
+    text.actor > tspan {
+        fill: $-text !important;
+        stroke: none !important;
+    }
+
+    .messageText,
+    .noteText,
+    .loopText,
+    .loopText > tspan,
+    .labelText,
+    .labelText > tspan {
+        fill: $-text !important;
+        stroke: none !important;
+    }
+
+    .messageLine0,
+    .messageLine1 {
+        stroke: $-line !important;
+    }
+
+    .note {
+        fill: rgb(var(--ctp-surface1)) !important;
+        stroke: rgb(var(--ctp-yellow)) !important;
+    }
+
+    .noteText,
+    .noteText > tspan {
+        fill: $-text !important;
+    }
+
+    .loopLine {
+        stroke: $-border !important;
+    }
+
+    .labelBox {
+        fill: $-node !important;
+        stroke: $-border !important;
+    }
+
+    .activation0,
+    .activation1,
+    .activation2 {
+        fill: rgb(var(--ctp-surface1)) !important;
+        stroke: $-line !important;
+    }
+
+    .sequenceNumber {
+        fill: $-crust !important;
+    }
+
+    #arrowhead path,
+    #sequencenumber,
+    #crosshead path {
+        fill: $-line !important;
+        stroke: $-line !important;
+    }
+
+    #sequencenumber {
+        fill: $-line !important;
+    }
+
+    // ---- class ---------------------------------------------------
+    .classTitle,
+    .classText {
+        fill: $-text !important;
+    }
+
+    g.node .divider path {
+        stroke: $-border !important;
+    }
+
+    .node .label-group .nodeLabel,
+    .node .members-group .nodeLabel,
+    .node .methods-group .nodeLabel,
+    .node .annotation-group .nodeLabel {
+        color: $-text !important;
+    }
+
+    // ---- state ---------------------------------------------------
+    .state-start,
+    circle.state-start {
+        fill: $-line !important;
+        stroke: $-line !important;
+    }
+
+    .end-state-inner,
+    .end-state-outer,
+    .node.statediagram-end circle {
+        fill: $-line !important;
+        stroke: $-line !important;
+    }
+
+    .statediagram-cluster rect {
+        fill: $-node !important;
+        stroke: $-border !important;
+    }
+
+    .statediagram-note rect,
+    .node.statediagram-note rect {
+        fill: rgb(var(--ctp-surface1)) !important;
+        stroke: rgb(var(--ctp-yellow)) !important;
+    }
+
+    // ---- ER ------------------------------------------------------
+    .row-rect-odd path,
+    .row-rect-odd rect {
+        fill: $-alt !important;
+        stroke: $-border !important;
+    }
+
+    .row-rect-even path,
+    .row-rect-even rect {
+        fill: $-node !important;
+        stroke: $-border !important;
+    }
+
+    .relationshipLabel,
+    .relationshipLabelBox {
+        fill: rgb(var(--ctp-base)) !important;
+    }
+
+    .attribute-keys,
+    .attribute-type,
+    .attribute-comment {
+        color: $-muted !important;
+        fill: $-muted !important;
+    }
+
+    // ---- gantt ---------------------------------------------------
+    .grid .tick line {
+        stroke: rgb(var(--ctp-surface1)) !important;
+    }
+
+    .grid .tick text {
+        fill: $-muted !important;
+    }
+
+    .grid path,
+    .grid .domain {
+        stroke: transparent !important;
+    }
+
+    .titleText {
+        fill: $-text !important;
+    }
+
+    .sectionTitle {
+        fill: $-text !important;
+    }
+
+    rect.section0,
+    rect.section2 {
+        fill: $-alt !important;
+    }
+
+    rect.section1,
+    rect.section3 {
+        fill: rgb(var(--ctp-mantle)) !important;
+    }
+
+    .task,
+    rect.task {
+        stroke-width: 1 !important;
+    }
+
+    .task0,
+    .task1,
+    .task2,
+    .task3 {
+        fill: rgb(var(--ctp-surface2)) !important;
+        stroke: $-border !important;
+    }
+
+    .active0,
+    .active1,
+    .active2,
+    .active3 {
+        fill: $-border !important;
+        stroke: rgb(var(--ctp-pink)) !important;
+    }
+
+    .done0,
+    .done1,
+    .done2,
+    .done3 {
+        fill: rgb(var(--ctp-surface1)) !important;
+        stroke: rgb(var(--ctp-overlay0)) !important;
+    }
+
+    .crit0,
+    .crit1,
+    .crit2,
+    .crit3,
+    .activeCrit0,
+    .activeCrit1,
+    .activeCrit2,
+    .activeCrit3,
+    .doneCrit0,
+    .doneCrit1,
+    .doneCrit2,
+    .doneCrit3 {
+        fill: rgb(var(--ctp-red)) !important;
+        stroke: rgb(var(--ctp-pink)) !important;
+    }
+
+    .milestone {
+        fill: rgb(var(--ctp-yellow)) !important;
+    }
+
+    // Task text: inside the bar needs contrast with the bar fill,
+    // outside it sits on the section background.
+    .taskText,
+    .taskTextOutsideLeft,
+    .taskTextOutsideRight {
+        fill: $-text !important;
+    }
+
+    .taskText.activeText0,
+    .taskText.activeText1,
+    .taskText.activeText2,
+    .taskText.activeText3,
+    .taskText.critText0,
+    .taskText.critText1,
+    .taskText.critText2,
+    .taskText.critText3,
+    .taskText.activeCritText0,
+    .taskText.activeCritText1,
+    .taskText.activeCritText2,
+    .taskText.activeCritText3 {
+        fill: $-crust !important;
+    }
+
+    .taskText.doneText0,
+    .taskText.doneText1,
+    .taskText.doneText2,
+    .taskText.doneText3 {
+        fill: $-muted !important;
+    }
+
+    .taskTextOutsideLeft,
+    .taskTextOutsideRight,
+    .taskTextOutside0,
+    .taskTextOutside1,
+    .taskTextOutside2,
+    .taskTextOutside3 {
+        fill: $-text !important;
+    }
+
+    .today {
+        stroke: rgb(var(--ctp-red)) !important;
+    }
+
+    // ---- pie -----------------------------------------------------
+    .pieOuterCircle {
+        stroke: $-border !important;
+        fill: none !important;
+    }
+
+    .pieCircle {
+        stroke: rgb(var(--ctp-base)) !important;
+        opacity: 1 !important;
+    }
+
+    @for $i from 1 through 8 {
+        path.pieCircle:nth-of-type(8n + #{$i}) {
+            fill: list.nth($-series, $i) !important;
+        }
+
+        .legend:nth-of-type(8n + #{$i}) rect {
+            fill: list.nth($-series, $i) !important;
+            stroke: list.nth($-series, $i) !important;
+        }
+    }
+
+    .pieTitleText,
+    .legend text {
+        fill: $-text !important;
+    }
+
+    .slice {
+        fill: $-crust !important;
+    }
+
+    .pieCircle ~ .slice,
+    text.slice {
+        fill: $-crust !important;
+    }
+
+    // ---- mindmap -------------------------------------------------
+    .mindmap-node.section-root circle,
+    .mindmap-node.section-root rect,
+    .mindmap-node.section-root path {
+        fill: $-border !important;
+        stroke: $-border !important;
+    }
+
+    .mindmap-node.section-root .nodeLabel,
+    .mindmap-node.section-root text {
+        color: $-crust !important;
+        fill: $-crust !important;
+    }
+
+    .mindmap-node .node-bkg {
+        stroke: none !important;
+    }
+
+    .edge {
+        fill: none !important;
+    }
+
+    @for $i from 0 through 7 {
+        .section-#{$i} .node-bkg,
+        .section-#{$i} rect,
+        .section-#{$i} path.node-bkg {
+            fill: list.nth($-series, $i + 1) !important;
+        }
+
+        .section-#{$i} .node-line-#{$i},
+        .section-#{$i} line {
+            stroke: list.nth($-series, $i + 1) !important;
+        }
+
+        .section-edge-#{$i} {
+            stroke: list.nth($-series, $i + 1) !important;
+        }
+
+        .section-#{$i} .nodeLabel,
+        .section-#{$i} text,
+        .section-#{$i} p,
+        .section-#{$i} span {
+            color: $-crust !important;
+            fill: $-crust !important;
+        }
+    }
+
+    // ---- gitGraph ------------------------------------------------
+    @for $i from 0 through 7 {
+        .branch#{$i},
+        .arrow#{$i} {
+            stroke: list.nth($-series, $i + 1) !important;
+        }
+
+        .commit#{$i},
+        .commit-merge.commit#{$i} {
+            fill: list.nth($-series, $i + 1) !important;
+            stroke: list.nth($-series, $i + 1) !important;
+        }
+
+        .label#{$i},
+        rect.branchLabelBkg.label#{$i} {
+            fill: list.nth($-series, $i + 1) !important;
+            stroke: list.nth($-series, $i + 1) !important;
+        }
+
+        .branch-label#{$i} text,
+        .branch-label#{$i} tspan {
+            fill: $-crust !important;
+            stroke: none !important;
+        }
+    }
+
+    .commit-label {
+        fill: $-text !important;
+    }
+
+    .commit-label-bkg {
+        fill: rgb(var(--ctp-base)) !important;
+        opacity: 0.85;
+    }
+
+    .commit-merge {
+        fill: rgb(var(--ctp-base)) !important;
+    }
+
+    .branch {
+        stroke-dasharray: 2;
+    }
+
+    // ---- journey -------------------------------------------------
+    .journey-section,
+    rect.journey-section {
+        stroke: none !important;
+    }
+
+    @for $i from 0 through 7 {
+        .section-type-#{$i} {
+            fill: list.nth($-series, $i + 1) !important;
+        }
+
+        .actor-#{$i} {
+            fill: list.nth($-series, $i + 1) !important;
+            stroke: $-crust !important;
+        }
+
+        text.journey-section.section-type-#{$i},
+        div.journey-section.section-type-#{$i} {
+            color: $-crust !important;
+            fill: $-crust !important;
+        }
+    }
+
+    .task-type-0,
+    .task-type-1,
+    .task-type-2,
+    .task-type-3,
+    .task-type-4,
+    .task-type-5,
+    .task-type-6,
+    .task-type-7 {
+        fill: $-node !important;
+        stroke: $-border !important;
+    }
+
+    .task-line {
+        stroke: $-line !important;
+    }
+
+    .face {
+        fill: rgb(var(--ctp-yellow)) !important;
+        stroke: $-crust !important;
+    }
+
+    .mouth {
+        stroke: $-crust !important;
+    }
+
+    .legend {
+        fill: $-text !important;
+    }
+
+    .task,
+    div.task,
+    text.task {
+        color: $-text !important;
+    }
+
+    // ---- timeline ------------------------------------------------
+    .timeline-node .node-bkg {
+        fill: $-node !important;
+        stroke: none !important;
+    }
+
+    @for $i from 0 through 7 {
+        .timeline-node.section-#{$i} .node-bkg {
+            fill: list.nth($-series, $i + 1) !important;
+        }
+
+        .timeline-node.section-#{$i} .node-line-#{$i} {
+            stroke: list.nth($-series, $i + 1) !important;
+        }
+
+        .timeline-node.section-#{$i} text,
+        .timeline-node.section-#{$i} tspan {
+            fill: $-crust !important;
+        }
+    }
+
+    // Mermaid brightens event boxes by 20%, which washes out the palette
+    .eventWrapper {
+        filter: none !important;
+    }
+
+    .eventWrapper line,
+    .lineWrapper line {
+        stroke: $-line !important;
+    }
+
+    .taskWrapper .node-line--1,
+    .node-line--1 {
+        stroke: $-line !important;
+    }
+}
