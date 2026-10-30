@@ -2,3 +2,6 @@
 *.css.map
 backup/
 .vscode/
+result
+result-*
+.direnv/
