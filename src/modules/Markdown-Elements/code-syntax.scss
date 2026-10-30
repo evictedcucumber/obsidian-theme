@@ -1,0 +1,138 @@
+/*---------------------------------------------------------------
+* CODE SYNTAX HIGHLIGHTING (Dracula spec)
+*
+* Obsidian highlights code with Prism in reading view (.token.*) and
+* CodeMirror in the editor (.cm-*), funnelling both through a handful
+* of --code-* variables. Those set the broad Dracula mapping below;
+* the rules after them split out the token types Obsidian groups
+* together but Dracula colours differently.
+*
+*   keywords, storage, operators, tags   pink
+*   functions, attribute names            green
+*   strings                               yellow
+*   numbers, booleans, constants          purple
+*   classes, types, built-ins             cyan
+*   parameters                            orange italic
+*   comments                              #6272A4
+*   variables, properties, punctuation    foreground
+*---------------------------------------------------------------*/
+body {
+    --code-normal: rgb(var(--ctp-text));
+    --code-comment: rgb(var(--ctp-overlay0));
+    --code-keyword: rgb(var(--ctp-pink));
+    --code-operator: rgb(var(--ctp-pink));
+    --code-tag: rgb(var(--ctp-pink));
+    --code-function: rgb(var(--ctp-green));
+    --code-string: rgb(var(--ctp-yellow));
+    --code-value: rgb(var(--ctp-mauve));
+    --code-property: rgb(var(--ctp-text));
+    --code-important: rgb(var(--ctp-peach));
+    --code-punctuation: rgb(var(--ctp-subtext1));
+
+    // Reading view (Prism)
+    .token {
+
+        &.class-name,
+        &.builtin,
+        &.namespace {
+            color: rgb(var(--ctp-sky));
+        }
+
+        &.class-name {
+            font-style: italic;
+        }
+
+        &.namespace {
+            opacity: 1;
+        }
+
+        &.parameter {
+            color: rgb(var(--ctp-peach));
+            font-style: italic;
+        }
+
+        &.constant,
+        &.symbol,
+        &.boolean,
+        &.number {
+            color: rgb(var(--ctp-mauve));
+        }
+
+        &.attr-name,
+        &.selector,
+        &.decorator,
+        &.annotation,
+        &.inserted {
+            color: rgb(var(--ctp-green));
+        }
+
+        &.attr-value,
+        &.char,
+        &.template-string {
+            color: rgb(var(--ctp-yellow));
+        }
+
+        &.regex,
+        &.deleted {
+            color: rgb(var(--ctp-red));
+        }
+
+        &.interpolation-punctuation,
+        &.escape,
+        &.important {
+            color: rgb(var(--ctp-pink));
+        }
+
+        &.property {
+            color: rgb(var(--ctp-sky));
+        }
+
+        &.comment {
+            font-style: italic;
+        }
+    }
+
+    // Editor (CodeMirror), only inside code blocks so markdown and
+    // frontmatter keep their own colours
+    .HyperMD-codeblock {
+
+        .cm-def {
+            color: rgb(var(--ctp-green));
+        }
+
+        .cm-type,
+        .cm-builtin,
+        .cm-variable-3 {
+            color: rgb(var(--ctp-sky));
+        }
+
+        .cm-type {
+            font-style: italic;
+        }
+
+        .cm-atom,
+        .cm-number {
+            color: rgb(var(--ctp-mauve));
+        }
+
+        .cm-property {
+            color: rgb(var(--ctp-sky));
+        }
+
+        .cm-attribute {
+            color: rgb(var(--ctp-green));
+        }
+
+        .cm-meta {
+            color: rgb(var(--ctp-pink));
+        }
+
+        .cm-string-2 {
+            color: rgb(var(--ctp-red));
+        }
+
+        .cm-comment {
+            font-style: italic;
+        }
+    }
+}

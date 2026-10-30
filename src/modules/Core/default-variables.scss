@@ -159,12 +159,11 @@ body {
     --font-monospace-theme: "JetBrainsMono Nerd Font", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     --tab-stacked-pane-width: calc(var(--anp-tab-stacked-pane-width, 1) * var(--file-line-width));
     --anp-table-width-pct: 100%;
-    --code-background: var(--anp-code-bg-color, var(--background-secondary-alt));
+    --code-background: var(--background-secondary-alt);
     --canvas-color: rgb(var(--ctp-overlay2));
     --card-background-color: rgb(var(--ctp-crust));
     --card-foreground-color: rgb(var(--ctp-base));
     --tab-inactive-color: rgb(var(--ctp-mantle));
-    --code-normal: var(--anp-code-text-color, var(--text-normal));
     --callout-padding: 0;
     --callout-title-padding: var(--size-4-2);
     --callout-content-padding: var(--size-4-2);
