@@ -74,9 +74,6 @@ settings:
             label: Dark (Generic)
             value: ctp-generic-dark
         -
-            label: Dracula
-            value: ctp-dracula
-        -
             label: Everforest
             value: ctp-everforest-dark
         -
@@ -156,10 +153,6 @@ settings:
   --ctp-ext-base: 10, 10, 10 !important;
   --ctp-ext-mantle: 5, 5, 5 !important;
   --ctp-ext-crust: 0, 0, 0 !important;
-}
-
-.theme-dark.anp-theme-ext-dark.ctp-dracula:not(.anuppuccin-accent-toggle) {
-  --ctp-accent: var(--ctp-mauve);
 }
 
 .theme-light.anp-theme-ext-light.ctp-atom-light,
@@ -310,36 +303,6 @@ settings:
   --ctp-ext-base: 58, 56, 69;
   --ctp-ext-mantle: 47, 46, 56;
   --ctp-ext-crust: 38, 37, 45;
-}
-
-.theme-dark.anp-theme-ext-dark.ctp-dracula,
-.anp-theme-ext-dark.ctp-dracula .themed-color-wrapper > .theme-dark {
-  --ctp-ext-rosewater: 246, 201, 153;
-  --ctp-ext-flamingo: 245, 189, 166;
-  --ctp-ext-pink: 255, 121, 198;
-  --ctp-ext-mauve: 189, 147, 249;
-  --ctp-ext-red: 255, 85, 85;
-  --ctp-ext-maroon: 230, 102, 102;
-  --ctp-ext-peach: 255, 184, 108;
-  --ctp-ext-yellow: 241, 250, 140;
-  --ctp-ext-green: 80, 250, 123;
-  --ctp-ext-teal: 104, 219, 211;
-  --ctp-ext-sky: 139, 233, 253;
-  --ctp-ext-sapphire: 104, 197, 240;
-  --ctp-ext-blue: 95, 126, 222;
-  --ctp-ext-lavender: 189, 147, 249;
-  --ctp-ext-text: 248, 248, 242;
-  --ctp-ext-subtext1: 211, 211, 197;
-  --ctp-ext-subtext0: 191, 191, 181;
-  --ctp-ext-overlay2: 139, 143, 167;
-  --ctp-ext-overlay1: 110, 114, 145;
-  --ctp-ext-overlay0: 98, 114, 164;
-  --ctp-ext-surface2: 68, 71, 90;
-  --ctp-ext-surface1: 56, 59, 76;
-  --ctp-ext-surface0: 48, 50, 65;
-  --ctp-ext-base: 40, 42, 54;
-  --ctp-ext-mantle: 33, 34, 44;
-  --ctp-ext-crust: 25, 26, 33;
 }
 
 .theme-light.anp-theme-ext-light.ctp-everforest-light,
