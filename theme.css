@@ -182,7 +182,6 @@ body {
 }
 
 body {
-  --anp-rainbow-folder-bg-opacity: 1;
   --anp-rainbow-folder-border-opacity: 1;
   --anp-rainbow-folder-collapse-border-custom: #00000044;
   --anp-preview-width-pct: 95%;
@@ -2411,21 +2410,53 @@ body .nav-file .nav-file-title[data-path$=".loom"]::before {
 
 /*---------------------------------------------------------------
 * FULL RAINBOW STYLE
+*
+* Each top-level folder keeps its colour as a solid title bar, while
+* its contents sit on the sidebar background with a light tint of that
+* colour, so file names stay readable on the saturated Dracula palette.
 *---------------------------------------------------------------*/
-body .nav-files-container > div > .nav-folder .nav-folder-title,
-body .nav-files-container > div > .nav-folder .nav-file-title,
-body .nav-files-container .collapse-icon svg.svg-icon,
-body .tree-item-self .tree-item-icon {
-  color: var(--background-primary);
-  --icon-color: var(--background-primary);
+body .nav-files-container > div > .nav-folder {
+  --rainbow-color: rgb(var(--rainbow-folder-color));
+  transition: background-color 0.4s;
+  background-color: color-mix(in srgb, var(--rainbow-color) 12%, var(--background-secondary));
+  margin-bottom: 2px;
+  border-radius: 5px;
 }
-body:not(.is-grabbing) .nav-files-container > div > .nav-folder .nav-folder-title:hover,
-body:not(.is-grabbing) .nav-files-container > div .nav-file .nav-file-title:hover {
-  background-color: rgba(var(--ctp-base), 0.1);
+body .nav-files-container > div > .nav-folder > .nav-folder-title {
+  background-color: var(--rainbow-color);
+  border-radius: 5px;
+  font-weight: var(--font-semibold);
 }
-body:not(.is-grabbing) .nav-files-container > div > .nav-folder .nav-file-title.is-active {
-  border-color: rgba(var(--ctp-base), 0.2);
-  background-color: rgba(var(--ctp-base), 0.2);
+body .nav-files-container > div > .nav-folder > .nav-folder-title,
+body .nav-files-container > div > .nav-folder > .nav-folder-title .nav-folder-title-content,
+body .nav-files-container > div > .nav-folder > .nav-folder-title .collapse-icon svg.svg-icon,
+body .nav-files-container > div > .nav-folder > .nav-folder-title .tree-item-icon {
+  color: rgb(var(--ctp-crust));
+  --icon-color: rgb(var(--ctp-crust));
+}
+body .nav-files-container > div > .nav-folder .nav-folder-children {
+  border-color: color-mix(in srgb, var(--rainbow-color) 45%, transparent);
+}
+body .nav-files-container > div > .nav-folder .nav-folder-children .nav-folder-title,
+body .nav-files-container > div > .nav-folder .nav-folder-children .nav-file-title {
+  color: rgb(var(--ctp-subtext1));
+}
+body .nav-files-container > div > .nav-folder .nav-folder-children .collapse-icon svg.svg-icon,
+body .nav-files-container > div > .nav-folder .nav-folder-children .tree-item-icon {
+  color: var(--rainbow-color);
+  --icon-color: var(--rainbow-color);
+}
+body:not(.is-grabbing) .nav-files-container > div > .nav-folder > .nav-folder-title:hover {
+  background-color: color-mix(in srgb, var(--rainbow-color) 85%, white);
+}
+body:not(.is-grabbing) .nav-files-container > div > .nav-folder .nav-folder-children .nav-folder-title:hover,
+body:not(.is-grabbing) .nav-files-container > div > .nav-folder .nav-folder-children .nav-file-title:hover {
+  background-color: color-mix(in srgb, var(--rainbow-color) 18%, transparent);
+}
+body:not(.is-grabbing) .nav-files-container > div > .nav-folder .nav-folder-children .nav-file-title.is-active {
+  border-color: color-mix(in srgb, var(--rainbow-color) 40%, transparent);
+  background-color: color-mix(in srgb, var(--rainbow-color) 30%, transparent);
+  color: var(--text-normal);
 }
 body .nav-file {
   overflow-y: hidden;
@@ -2446,17 +2477,7 @@ body .nav-file-title-content.is-being-renamed::selection {
 body .nav-files-container .nav-folder > .nav-folder-children {
   padding: 0 5px 0 5px;
 }
-body .nav-files-container > div > .nav-folder {
-  transition: background-color 0.4s;
-  background-color: rgba(var(--rainbow-folder-color), var(--anp-rainbow-folder-bg-opacity));
-  margin-bottom: 2px;
-  border-radius: 5px;
-}
-body .nav-files-container > div > .nav-folder .nav-folder-children {
-  border-color: rgba(var(--ctp-crust), 0.4);
-}
 body .nav-files-container > div > .nav-file.has-focus {
-  background-color: rgba(var(--ctp-text), var(--anp-rainbow-folder-bg-opacity));
   border-left: none;
   border-color: rgb(var(--ctp-accent));
 }
