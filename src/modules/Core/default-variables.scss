@@ -143,6 +143,14 @@ $accents: "rosewater", "flamingo", "pink", "mauve", "red", "maroon", "peach",
     --embed-block-shadow-hover: none; //no shadow
 }
 
+// Text on accent backgrounds follows the accent's luminance (dark text on light
+// accents, light text on dark ones) instead of always using the base colour
+@supports (color: contrast-color(red)) {
+    .anuppuccin-accent-toggle {
+        --text-on-accent: contrast-color(rgb(var(--ctp-accent)));
+    }
+}
+
 .theme-dark {
     color-scheme: dark;
     --highlight-mix-blend-mode: none;
