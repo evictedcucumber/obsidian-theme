@@ -21,7 +21,7 @@ Unlike upstream, this fork has **no Style Settings options**. The settings it us
 - **Extras:**
   - custom checkboxes and speech bubbles
   - codeblock line numbers
-  - Properties button
+  - Properties button (Properties are hidden in Reading view)
   - print styling
   - file and folder icons, full rainbow folders
   - darker canvas, PDF background blending

@@ -3,3 +3,8 @@
         display: none !important;
     }
 }
+
+// Same as the Hider plugin's "Hide properties in Reading view"; editing views keep them
+.markdown-reading-view {
+    --metadata-display-reading: none;
+}
