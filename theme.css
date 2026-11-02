@@ -1416,6 +1416,10 @@ body .math-block {
   display: none !important;
 }
 
+.markdown-reading-view {
+  --metadata-display-reading: none;
+}
+
 /*-Recolor table borders-*/
 body .markdown-preview-view:not(.cards):not(.table-disable) table,
 body .markdown-preview-view.cards:not(.table-disable) table:not(.dataview),
