@@ -21,7 +21,7 @@ Unlike upstream, this fork has **no Style Settings options**. The settings it us
 - **Extras:**
   - custom checkboxes and speech bubbles
   - codeblock line numbers
-  - Properties button (Properties are hidden in Reading view)
+  - Properties hidden in Reading view
   - print styling
   - file and folder icons, full rainbow folders
   - darker canvas, PDF background blending
@@ -71,7 +71,6 @@ Add these to a note's `cssclasses` property.
 | Class             | Effect                                          |
 | ----------------- | ----------------------------------------------- |
 | `hide-metadata`   | Hides the Properties block                      |
-| `metadata-button` | Collapses Properties into a button              |
 | `row-alt`, `col-alt`, `checkered`, `th-highlight`, `table-full` | Table highlight styles |
 
 ## Installation

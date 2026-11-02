@@ -4,18 +4,6 @@
         margin-right: -12px;
     }
 
-    body & {
-        .metadata-container .metadata-properties-heading {
-            left: unset;
-            right: calc(100% - 32px);
-
-            &:after {
-                margin-left: unset;
-                margin-right: 7px;
-            }
-        }
-    }
-
     blockquote {
         border-right: var(--blockquote-border-thickness) solid var(--blockquote-border-color);
         border-left: none;
